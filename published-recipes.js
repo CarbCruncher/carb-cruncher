@@ -1163,7 +1163,7 @@ const publishedRecipes = [
     "name":"Blueberry Oat Yogurt Cup","ingredients":[{"food":"Rolled Oats, dry","label":"1/4 cup (20 g)","quantity":1},{"food":"Blueberries","label":"1/2 cup","quantity":1},{"food":"Plain Greek Yogurt","label":"1/2 cup","quantity":1}],
     "totalCarbs":29,"plateCarbs":29,"servings":1,"portion":"cup","category":"Snack",
     "instructions":"Layer Greek yogurt with blueberries and rolled oats. Chill for 10 minutes to soften the oats, or leave them crunchy.",
-    "image":"https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=1000&q=85","photo":"Unsplash","source":"https://unsplash.com/"
+    "image":"./Carbs%20logo.png","photo":"Carb Cruncher logo","source":"./Carbs%20logo.png"
   },
   {
     "id":"snack-date-peanut-butter-bites-20261102",
@@ -1255,7 +1255,7 @@ const publishedRecipes = [
     "ingredients":[{"food":"Masa Harina","label":"1/4 cup (30 g)","quantity":1},{"food":"Refried Beans","label":"2 tablespoons","quantity":1},{"food":"Queso Fresco","label":"1/2 oz","quantity":1},{"food":"Salsa","label":"2 tablespoons","quantity":1}],
     "totalCarbs":35,"plateCarbs":35,"servings":1,"portion":"snack plate","category":"Snack",
     "instructions":"Mix masa harina with water into a soft dough, shape into two small thick rounds, and cook on a hot dry skillet. Pinch a shallow rim, then top with beans, salsa, and queso fresco. The masa makes these higher in carbs, so the serving is kept small.",
-    "image":"https://images.unsplash.com/photo-1626700051175-6818013e1d4f?auto=format&fit=crop&w=1000&q=85","photo":"Unsplash","source":"https://unsplash.com/"
+    "image":"./Carbs%20logo.png","photo":"Carb Cruncher logo","source":"./Carbs%20logo.png"
   },
   {
     "id":"mex-jicama-chile-lime-sticks-20261102","name":"Jicama Chile-Lime Snack Sticks",
@@ -1374,7 +1374,7 @@ const publishedRecipes = [
     "ingredients":[{"food":"Cucumber","label":"1 cup sliced","quantity":1},{"food":"Apple Cider Vinegar","label":"1 tablespoon","quantity":1},{"food":"Salt","label":"1/4 teaspoon","quantity":1},{"food":"Garlic","label":"1 clove","quantity":1}],
     "totalCarbs":5.1,"plateCarbs":5.1,"servings":2,"portion":"small bowl","category":"Snack",
     "instructions":"Pack sliced cucumber and garlic into a clean jar. Stir vinegar, 2 tablespoons water, and salt together; pour over the cucumber. Refrigerate at least 2 hours and keep chilled. These are quick refrigerator pickles, not shelf-stable canning pickles.",
-    "image":"https://images.unsplash.com/photo-1568702846914-96b305d2aaeb?auto=format&fit=crop&w=1000&q=85","photo":"Unsplash","source":"https://fdc.nal.usda.gov/","inspirationUrl":"https://www.pinterest.com/pin/714313190944477942/"
+    "image":"./Carbs%20logo.png","photo":"Carb Cruncher logo","source":"./Carbs%20logo.png","inspirationUrl":"https://www.pinterest.com/pin/714313190944477942/"
   },
   {
     "id":"pin-kimchi-cabbage-side-20261102","name":"Simple Spicy Cabbage Kimchi Side",
@@ -1438,7 +1438,7 @@ const publishedRecipes = [
     "ingredients":[{"food":"Self-Rising Flour","label":"1/2 cup (62.5 g)","quantity":1},{"food":"Cottage Cheese","label":"1/2 cup","quantity":1},{"food":"Mozzarella Cheese","label":"1 oz (about 1/4 cup shredded)","quantity":1},{"food":"Garlic Powder","label":"1/2 teaspoon","quantity":1},{"food":"Butter, salted","label":"1 tablespoon (14 g)","quantity":1}],
     "totalCarbs":54.7,"plateCarbs":54.7,"servings":4,"portion":"one knot","category":"Sides",
     "instructions":"Mix flour, cottage cheese, and mozzarella into a soft dough. Divide into four pieces, roll each into a rope, and tie into knots. Bake at 400°F until golden. Brush with melted butter and garlic powder while warm.",
-    "image":"https://images.unsplash.com/photo-1549931319-a545dcf3bc73?auto=format&fit=crop&w=1000&q=85","photo":"Unsplash","source":"https://fdc.nal.usda.gov/","inspirationUrl":"https://www.pinterest.com/pin/714313190944450644/"
+    "image":"./Carbs%20logo.png","photo":"Carb Cruncher logo","source":"./Carbs%20logo.png","inspirationUrl":"https://www.pinterest.com/pin/714313190944450644/"
   },
   {
     "id":"pin-pepperoni-pizza-chips-20261102","name":"Pepperoni Pizza Chips",
@@ -1508,7 +1508,7 @@ const publishedRecipes = [
     "ingredients":[{"food":"Rolled Oats, dry","label":"1/2 cup (40 g)","quantity":1},{"food":"Milk, 1%","label":"1/4 cup","quantity":1},{"food":"Plain Greek Yogurt","label":"1/2 cup","quantity":1},{"food":"Blueberries","label":"1/4 cup","quantity":1}],
     "totalCarbs":39.3,"plateCarbs":39.3,"servings":1,"portion":"overnight oats jar","category":"Breakfast",
     "instructions":"Stir oats, milk, and Greek yogurt together in a jar. Fold in blueberries, cover, and refrigerate overnight. Adjust the liquid in the morning; use the measured amounts to keep the carb total clear.",
-    "image":"https://images.unsplash.com/photo-1517673132405-a56a62b18caf?auto=format&fit=crop&w=1000&q=85","photo":"Unsplash","source":"https://fdc.nal.usda.gov/","inspirationUrl":"https://www.pinterest.com/pin/714313190944451141/"
+    "image":"./Carbs%20logo.png","photo":"Carb Cruncher logo","source":"./Carbs%20logo.png","inspirationUrl":"https://www.pinterest.com/pin/714313190944451141/"
   },
   {
     "id":"pin-baja-fish-taco-salad-bowl-20261102","name":"Baja Fish Taco Salad Bowl",
@@ -1536,7 +1536,7 @@ const publishedRecipes = [
     "ingredients":[{"food":"Cottage Cheese","label":"1/2 cup","quantity":1},{"food":"Almond Flour","label":"1/4 cup","quantity":1},{"food":"Egg","label":"1 large egg","quantity":1},{"food":"Dark Brown Sugar, packed","label":"1 teaspoon","quantity":1},{"food":"Cinnamon, ground","label":"1 teaspoon (2.6 g)","quantity":1},{"food":"Baking Soda","label":"1/4 teaspoon","quantity":1}],
     "totalCarbs":18.3,"plateCarbs":18.3,"servings":4,"portion":"one cookie","category":"Breakfast",
     "instructions":"Blend cottage cheese and egg until smooth. Stir in almond flour, brown sugar, cinnamon, and baking soda. Scoop four cookies onto a lined tray and bake at 350°F until set. Cool before serving.",
-    "image":"https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&w=1000&q=85","photo":"Unsplash","source":"https://fdc.nal.usda.gov/","inspirationUrl":"https://www.pinterest.com/pin/714313190944454662/"
+    "image":"./Carbs%20logo.png","photo":"Carb Cruncher logo","source":"./Carbs%20logo.png","inspirationUrl":"https://www.pinterest.com/pin/714313190944454662/"
   },
   {
     "id":"pin-almond-flour-tres-leches-cups-20261102","name":"Almond Flour Tres Leches Cups",
@@ -1558,7 +1558,7 @@ const publishedRecipes = [
     "ingredients":[{"food":"Pumpkin, canned, without salt","label":"1/2 cup (122.5 g)","quantity":1},{"food":"Plain Greek Yogurt","label":"3/4 cup","quantity":1},{"food":"Egg","label":"2 large eggs","quantity":1},{"food":"Almond Flour","label":"1/4 cup","quantity":1},{"food":"Dark Brown Sugar, packed","label":"1 tablespoon (13 g)","quantity":1},{"food":"Cinnamon, ground","label":"1 teaspoon (2.6 g)","quantity":1},{"food":"Baking Soda","label":"1/2 teaspoon","quantity":1}],
     "totalCarbs":38.6,"plateCarbs":38.6,"servings":6,"portion":"cake slice","category":"Dessert",
     "instructions":"Whisk pumpkin, Greek yogurt, eggs, and brown sugar. Fold in almond flour, cinnamon, and baking soda. Spread in a small lined pan and bake at 350°F until the center springs back. Cool fully and cut into six slices.",
-    "image":"https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=1000&q=85","photo":"Unsplash","source":"https://fdc.nal.usda.gov/","inspirationUrl":"https://www.pinterest.com/terrillandrea/blueberry-cottage-cheese-muffins/"
+    "image":"./Carbs%20logo.png","photo":"Carb Cruncher logo","source":"./Carbs%20logo.png","inspirationUrl":"https://www.pinterest.com/terrillandrea/blueberry-cottage-cheese-muffins/"
   },
   {
     "id":"pin-berry-cottage-cheese-cheesecake-cups-20261102","name":"Berry Cottage Cheese Cheesecake Cups",

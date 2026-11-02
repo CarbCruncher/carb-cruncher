@@ -1,6 +1,7 @@
-const CACHE_NAME = "carb-cruncher-app-v1";
+const CACHE_NAME = "carb-cruncher-app-v16";
 const APP_SHELL = [
   "./index.html",
+  "./published-recipes.js",
   "./app.webmanifest",
   "./app-icon-192.png",
   "./app-icon-512.png",

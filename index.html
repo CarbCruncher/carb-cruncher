@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-sa<html lang="en">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -395,15 +395,20 @@ sa<html lang="en">
         background: transparent;
         padding-bottom: 150px;
     }
+    .app.home-layout {
+        max-width: 430px;
+        padding-left: 0;
+        padding-right: 0;
+    }
     .app.settings-wide {
         max-width: none;
         padding-left: clamp(16px, 5vw, 48px);
         padding-right: clamp(16px, 5vw, 48px);
     }
     .app.content-wide {
-        max-width: 1120px;
-        padding-left: clamp(16px, 6.5vw, 96px);
-        padding-right: clamp(16px, 6.5vw, 96px);
+        max-width: 1440px;
+        padding-left: clamp(16px, 2vw, 32px);
+        padding-right: clamp(16px, 2vw, 32px);
         box-sizing: border-box;
     }
     .app.content-wide .functional-screen > div {
@@ -1227,7 +1232,7 @@ sa<html lang="en">
 
 <body>
 
-<main class="app">
+<main class="app home-layout">
 
 <!-- ========================================
      LOGO
@@ -1419,7 +1424,7 @@ sa<html lang="en">
         >
 
         <span>
-            My Carb Cruncher
+            My Recipes
         </span>
 
     </a>
@@ -1498,6 +1503,36 @@ const commonMisspellings = {
 };
 // carbsPerOunce values are approximate conversions from the app's existing portions.
 const foods = [
+    // USDA FoodData Central values (carbohydrate by difference; household servings are rounded estimates).
+    { name: "Jicama", serving: "1 cup raw sticks", carbs: 11, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=jicama", category: "Vegetables", carbsPerOunce: 2.5, servingOptions: [{label:"1 cup raw sticks",amount:1,carbs:11},{label:"1/2 cup raw sticks",amount:0.5,carbs:5.5},{label:"1 medium jicama (about 1 lb edible portion)",amount:1,carbs:80}] },
+    { name: "Bok Choy", serving: "1 cup chopped raw", carbs: 1.5, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=bok+choy+raw", category: "Vegetables", carbsPerOunce: 0.4, servingOptions: [{label:"1 cup chopped raw",amount:1,carbs:1.5},{label:"1/2 cup chopped raw",amount:0.5,carbs:0.8},{label:"1 cup cooked",amount:1,carbs:3}] },
+    { name: "Green Onions", serving: "1/4 cup chopped", carbs: 2, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=onions+spring+or+scallions+raw", category: "Vegetables", carbsPerOunce: 1.6, servingOptions: [{label:"1 tablespoon chopped",amount:0.25,carbs:0.5},{label:"1/4 cup chopped",amount:1,carbs:2},{label:"1/2 cup chopped",amount:2,carbs:4}] },
+    { name: "Ginger Root", serving: "1 tablespoon grated", carbs: 1, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=ginger+root+raw", category: "Vegetables", carbsPerOunce: 3.8, servingOptions: [{label:"1 teaspoon grated",amount:1/3,carbs:0.3},{label:"1 tablespoon grated",amount:1,carbs:1},{label:"1 oz",amount:1,carbs:3.8}] },
+    { name: "Almond Flour", serving: "1/4 cup", carbs: 6, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=flour+almond", category: "Baking", carbsPerOunce: 6.1, servingOptions: [{label:"1 tablespoon",amount:0.25,carbs:1.5},{label:"1/4 cup",amount:1,carbs:6},{label:"1/2 cup",amount:2,carbs:12}] },
+    { name: "Coconut Milk, unsweetened canned", serving: "1/4 cup", carbs: 1.5, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=coconut+milk+canned+unsweetened", category: "Dairy Alternatives", carbsPerOunce: 0.8, servingOptions: [{label:"1 tablespoon",amount:0.25,carbs:0.4},{label:"1/4 cup",amount:1,carbs:1.5},{label:"1 cup",amount:4,carbs:6}] },
+    { name: "Sesame Oil", serving: "1 teaspoon", carbs: 0, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=oil+sesame", category: "Oils", carbsPerOunce: 0, servingOptions: [{label:"1 teaspoon",amount:1,carbs:0},{label:"1 tablespoon",amount:3,carbs:0}] },
+    { name: "Garlic Powder", serving: "1 teaspoon", carbs: 2, category: "Spices", carbsPerOunce: 2.3, servingOptions: [{label:"1 teaspoon",amount:1,carbs:2},{label:"1/2 teaspoon",amount:0.5,carbs:1},{label:"1/4 teaspoon",amount:0.25,carbs:0.5},{label:"1 tablespoon",amount:3,carbs:6}] },
+    { name: "Onion Powder", serving: "1 teaspoon", carbs: 2, category: "Spices", carbsPerOunce: 2.2, servingOptions: [{label:"1 teaspoon",amount:1,carbs:2},{label:"1 tablespoon",amount:3,carbs:6}] },
+    { name: "Paprika", serving: "1 teaspoon", carbs: 1, category: "Spices", carbsPerOunce: 1.7, servingOptions: [{label:"1 teaspoon",amount:1,carbs:1},{label:"1 tablespoon",amount:3,carbs:3}] },
+    { name: "Cayenne Pepper", serving: "1 teaspoon", carbs: 1, category: "Spices", carbsPerOunce: 1.6, servingOptions: [{label:"1 teaspoon",amount:1,carbs:1},{label:"1 tablespoon",amount:3,carbs:3}] },
+    { name: "Cumin", serving: "1 teaspoon", carbs: 1, category: "Spices", carbsPerOunce: 1.6, servingOptions: [{label:"1 teaspoon",amount:1,carbs:1},{label:"1 tablespoon",amount:3,carbs:3}] },
+    { name: "Chili Powder", serving: "1 teaspoon", carbs: 1, category: "Spices", carbsPerOunce: 1.5, servingOptions: [{label:"1 teaspoon",amount:1,carbs:1},{label:"1 tablespoon",amount:3,carbs:3}] },
+    { name: "Oregano, dried", serving: "1 teaspoon", carbs: 1, category: "Spices", carbsPerOunce: 1.7, servingOptions: [{label:"1 teaspoon",amount:1,carbs:1},{label:"1 tablespoon",amount:3,carbs:3}] },
+    // Mexican market staples: rounded household portions derived from USDA FoodData Central records.
+    { name: "Tomatillos, raw", serving: "1 cup chopped", carbs: 7.7, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=tomatillos+raw", category: "Vegetables", servingOptions: [{label:"1 cup chopped",amount:1,carbs:7.7},{label:"1/2 cup chopped",amount:0.5,carbs:3.9},{label:"1 medium tomatillo",amount:0.26,carbs:2}] },
+    { name: "Jalapeño Pepper", serving: "1 pepper", carbs: 0.9, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=jalapeno+pepper+raw", category: "Vegetables", servingOptions: [{label:"1 pepper",amount:1,carbs:0.9},{label:"1/2 pepper",amount:0.5,carbs:0.45},{label:"2 peppers",amount:2,carbs:1.8}] },
+    { name: "Poblano Pepper", serving: "1 pepper", carbs: 4.1, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=poblano+pepper+raw", category: "Vegetables", servingOptions: [{label:"1 pepper",amount:1,carbs:4.1},{label:"1/2 pepper",amount:0.5,carbs:2.05},{label:"2 peppers",amount:2,carbs:8.2}] },
+    { name: "Nopales, cooked", serving: "1 cup cooked", carbs: 5, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=nopales+cooked", category: "Vegetables", servingOptions: [{label:"1 cup cooked",amount:1,carbs:5},{label:"1/2 cup cooked",amount:0.5,carbs:2.5},{label:"1/4 cup cooked",amount:0.25,carbs:1.25}] },
+    { name: "Queso Oaxaca", serving: "1 oz", carbs: 0.8, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=queso+oaxaca", category: "Dairy", servingOptions: [{label:"1 oz",amount:1,carbs:0.8},{label:"1/2 oz",amount:0.5,carbs:0.4},{label:"2 oz",amount:2,carbs:1.6}] },
+    { name: "Masa Harina", serving: "1/4 cup (30 g)", carbs: 23.8, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=masa+harina", category: "Grains", servingOptions: [{label:"1/4 cup (30 g)",amount:1,carbs:23.8},{label:"2 tablespoons (15 g)",amount:0.5,carbs:11.9},{label:"1/2 cup (60 g)",amount:2,carbs:47.6}] },
+    // USDA FoodData Central carb values; household portions are rounded estimates.
+    { name: "Hummus", serving: "2 tablespoons", carbs: 4, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=hummus", category: "Snacks", servingOptions: [{label:"2 tablespoons",amount:1,carbs:4},{label:"1 tablespoon",amount:0.5,carbs:2},{label:"1/4 cup",amount:2,carbs:8}] },
+    { name: "Edamame, shelled cooked", serving: "1/2 cup", carbs: 8, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=edamame+cooked", category: "Legumes", servingOptions: [{label:"1/2 cup",amount:1,carbs:8},{label:"1/4 cup",amount:0.5,carbs:4},{label:"1 cup",amount:2,carbs:16}] },
+    { name: "Rice Cake, plain", serving: "1 cake (9 g)", carbs: 7.3, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=rice+cake+plain", category: "Snacks", servingOptions: [{label:"1 cake (9 g)",amount:1,carbs:7.3},{label:"2 cakes (18 g)",amount:2,carbs:14.6}] },
+    { name: "Rolled Oats, dry", serving: "1/2 cup (40 g)", carbs: 27, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=rolled+oats+dry", category: "Grains", servingOptions: [{label:"1/2 cup (40 g)",amount:1,carbs:27},{label:"1/4 cup (20 g)",amount:0.5,carbs:13.5},{label:"1 cup (80 g)",amount:2,carbs:54}] },
+    { name: "Pita Chips", serving: "1 oz (28 g)", carbs: 19, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=pita+chips", category: "Snacks", servingOptions: [{label:"1 oz (28 g)",amount:1,carbs:19},{label:"1/2 oz (14 g)",amount:0.5,carbs:9.5}] },
+    { name: "Dates, Medjool", serving: "1 date (24 g)", carbs: 18, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=dates+medjool", category: "Fruit", servingOptions: [{label:"1 date (24 g)",amount:1,carbs:18},{label:"1/2 date (12 g)",amount:0.5,carbs:9},{label:"2 dates (48 g)",amount:2,carbs:36}] },
+    { name: "Almond Butter", serving: "1 tablespoon", carbs: 3.4, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=almond+butter", category: "Other", servingOptions: [{label:"1 tablespoon",amount:1,carbs:3.4},{label:"2 tablespoons",amount:2,carbs:6.8}] },
 
     {
         name: "Apple",
@@ -1672,6 +1707,7 @@ const foods = [
         servingOptions: [
             { label: "1 large egg", amount: 1, carbs: 1 },
             { label: "2 large eggs", amount: 2, carbs: 2 },
+            { label: "3 large eggs", amount: 3, carbs: 3 },
             { label: "1/2 large egg", amount: 0.5, carbs: 0.5 }
         ]
     },
@@ -1724,11 +1760,14 @@ const foods = [
         carbs: 16,
         category: "Vegetables",
         carbsPerOunce: 5.5,
+        fdcSource: "https://fdc.nal.usda.gov/food-search/?query=corn+sweet+yellow+cooked",
         servingOptions: [
             { label: "1/2 cup cooked", amount: 0.5, carbs: 16 },
             { label: "1 cup cooked", amount: 1, carbs: 32 },
             { label: "1/3 cup cooked", amount: 1 / 3, carbs: 10.7 },
             { label: "1/4 cup cooked", amount: 0.25, carbs: 8 },
+            { label: "1 medium ear, cooked (about 90 g edible kernels)", amount: 0.53, carbs: 17 },
+            { label: "1 large ear, cooked", amount: 0.72, carbs: 23 },
             { label: "1 can (10 oz)", amount: 1, carbs: 55 }
         ]
     },
@@ -1771,7 +1810,7 @@ const foods = [
     { name: "Mayonnaise", serving: "1 tablespoon", carbs: 0, category: "Other", carbsPerOunce: 0.5, servingOptions: [{ label: "1 tablespoon", amount: 1, carbs: 0 }, { label: "1 teaspoon", amount: 1/3, carbs: 0 }] },
     { name: "Plain Greek Yogurt", serving: "3/4 cup", carbs: 6, category: "Dairy", carbsPerOunce: 0.7, servingOptions: [{ label: "3/4 cup", amount: 1, carbs: 6 }, { label: "1/2 cup", amount: 0.67, carbs: 4 }, {label:"2 tablespoons",amount:0.25,carbs:1.5}] },
     { name: "Strawberries", serving: "1 cup sliced", carbs: 12, category: "Fruit", carbsPerOunce: 2.2, servingOptions: [{ label: "1 cup sliced", amount: 1, carbs: 12 }, { label: "1/2 cup sliced", amount: 0.5, carbs: 6 }] },
-    { name: "Peanut Butter", serving: "2 tablespoons", carbs: 7, category: "Other", carbsPerOunce: 6.5, servingOptions: [{ label: "2 tablespoons", amount: 1, carbs: 7 }, { label: "1 tablespoon", amount: 0.5, carbs: 3.5 }] },
+    { name: "Peanut Butter", serving: "2 tablespoons", carbs: 7, category: "Other", carbsPerOunce: 6.5, servingOptions: [{ label: "2 tablespoons", amount: 1, carbs: 7 }, { label: "1 tablespoon", amount: 0.5, carbs: 3.5 }, { label: "1 teaspoon", amount: 1/6, carbs: 1.2 }] },
     { name: "Oatmeal, cooked", serving: "1 cup cooked", carbs: 27, category: "Grains", carbsPerOunce: 3.3, servingOptions: [{label:"1 cup cooked",amount:1,carbs:27},{label:"1/2 cup cooked",amount:0.5,carbs:13.5}] },
     { name: "Quinoa, cooked", serving: "1 cup cooked", carbs: 39, category: "Grains", carbsPerOunce: 6.9, servingOptions: [{label:"1 cup cooked",amount:1,carbs:39},{label:"1/2 cup cooked",amount:0.5,carbs:19.5}] },
     { name: "Corn Tortilla", serving: "1 medium tortilla", carbs: 12, category: "Grains", carbsPerOunce: 12, servingOptions: [{label:"1 tortilla",amount:1,carbs:12},{label:"2 tortillas",amount:2,carbs:24}] },
@@ -1789,7 +1828,7 @@ const foods = [
     { name: "Avocado", serving: "1/2 medium avocado", carbs: 6, category: "Fruit", carbsPerOunce: 1.1, servingOptions: [{label:"1/2 medium avocado",amount:0.5,carbs:6},{label:"1 medium avocado",amount:1,carbs:12},{label:"1/2 cup sliced",amount:0.5,carbs:6}] },
     { name: "Orange", serving: "1 medium orange", carbs: 15, category: "Fruit", carbsPerOunce: 3.5, servingOptions: [{label:"1 medium orange",amount:1,carbs:15},{label:"1/2 orange",amount:0.5,carbs:7.5},{label:"1 cup sections",amount:1,carbs:21}] },
     { name: "Grapes", serving: "1 cup", carbs: 27, category: "Fruit", carbsPerOunce: 4.8, servingOptions: [{label:"1 cup",amount:1,carbs:27},{label:"1/2 cup",amount:0.5,carbs:13.5},{label:"1 handful (about 1/2 cup)",amount:0.5,carbs:13.5}] },
-    { name: "Blueberries", serving: "1 cup", carbs: 21, category: "Fruit", carbsPerOunce: 4.2, servingOptions: [{label:"1 cup",amount:1,carbs:21},{label:"1/2 cup",amount:0.5,carbs:10.5},{label:"1/3 cup",amount:1/3,carbs:7}] },
+    { name: "Blueberries", serving: "1 cup", carbs: 21, category: "Fruit", carbsPerOunce: 4.2, servingOptions: [{label:"1 cup",amount:1,carbs:21},{label:"1/2 cup",amount:0.5,carbs:10.5},{label:"1/3 cup",amount:1/3,carbs:7},{label:"1/4 cup",amount:0.25,carbs:5.3}] },
     { name: "Orange Juice", serving: "1 cup", carbs: 26, category: "Drinks", carbsPerOunce: 3.2, servingOptions: [{label:"1 cup",amount:1,carbs:26},{label:"1/2 cup",amount:0.5,carbs:13},{label:"1/2 can (6 oz)",amount:0.5,carbs:19.5}] },
     { name: "Coffee, black", serving: "1 cup", carbs: 0, category: "Drinks", carbsPerOunce: 0, servingOptions: [{label:"1 cup",amount:1,carbs:0},{label:"1 mug (12 oz)",amount:1,carbs:0}] },
     { name: "Tea, unsweetened", serving: "1 cup", carbs: 0, category: "Drinks", carbsPerOunce: 0, servingOptions: [{label:"1 cup",amount:1,carbs:0},{label:"1 mug (12 oz)",amount:1,carbs:0}] },
@@ -1811,6 +1850,9 @@ const foods = [
     { name: "Olive Oil", serving: "1 tablespoon", carbs: 0, category: "Other", servingOptions: [{label:"1 tablespoon",amount:1,carbs:0},{label:"1 teaspoon",amount:1/3,carbs:0},{label:"1 drizzle (about 1 teaspoon)",amount:1/3,carbs:0}] },
     { name: "Butter", serving: "1 tablespoon", carbs: 0, category: "Dairy", servingOptions: [{label:"1 tablespoon",amount:1,carbs:0},{label:"1 teaspoon",amount:1/3,carbs:0},{label:"1 pat",amount:0.3,carbs:0}] },
     { name: "Coffee Creamer, sweetened", serving: "1 tablespoon", carbs: 5, category: "Dairy", servingOptions: [{label:"1 tablespoon",amount:1,carbs:5},{label:"1 splash (about 1 tablespoon)",amount:1,carbs:5},{label:"2 tablespoons",amount:2,carbs:10}] },
+    { name: "Coffee mate Pumpkin Spice Liquid Creamer", serving: "1 tablespoon (15 mL)", carbs: 5, nutritionSource: "https://www.goodnes.com/coffeemate/products/pumpkin-spice-non-dairy-liquid-coffee-creamer-32-fl-oz-bottle/", category: "Drinks", labelDependent: true, servingOptions: [{label:"1 tablespoon (15 mL; about 1 splash)",amount:1,carbs:5},{label:"2 tablespoons (30 mL; about 2 splashes)",amount:2,carbs:10},{label:"3 tablespoons (45 mL; about 3 splashes)",amount:3,carbs:15},{label:"1/4 cup (4 tablespoons; about 4 splashes)",amount:4,carbs:20},{label:"1 fl oz (2 tablespoons)",amount:2,carbs:10}] },
+    { name: "Coffee mate French Vanilla Liquid Creamer", serving: "1 tablespoon (15 mL)", carbs: 5, nutritionSource: "https://www.goodnes.com/coffeemate/products/french-vanilla-liquid-creamer-64oz/", category: "Drinks", labelDependent: true, servingOptions: [{label:"1 tablespoon (15 mL; about 1 splash)",amount:1,carbs:5},{label:"2 tablespoons (30 mL; about 2 splashes)",amount:2,carbs:10},{label:"3 tablespoons (45 mL; about 3 splashes)",amount:3,carbs:15},{label:"1/4 cup (4 tablespoons; about 4 splashes)",amount:4,carbs:20},{label:"1 fl oz (2 tablespoons)",amount:2,carbs:10}] },
+    { name: "Coffee mate Hazelnut Liquid Creamer", serving: "1 tablespoon (15 mL)", carbs: 5, nutritionSource: "https://www.goodnes.com/coffeemate/products/hazelnut-liquid-coffee-creamer-64-oz-bottle/", category: "Drinks", labelDependent: true, servingOptions: [{label:"1 tablespoon (15 mL; about 1 splash)",amount:1,carbs:5},{label:"2 tablespoons (30 mL; about 2 splashes)",amount:2,carbs:10},{label:"3 tablespoons (45 mL; about 3 splashes)",amount:3,carbs:15},{label:"1/4 cup (4 tablespoons; about 4 splashes)",amount:4,carbs:20},{label:"1 fl oz (2 tablespoons)",amount:2,carbs:10}] },
     { name: "Half-and-Half", serving: "1 tablespoon", carbs: 1, category: "Dairy", servingOptions: [{label:"1 tablespoon",amount:1,carbs:1},{label:"1 splash (about 1 tablespoon)",amount:1,carbs:1},{label:"2 tablespoons",amount:2,carbs:2}] },
     { name: "Ranch Dressing", serving: "2 tablespoons", carbs: 2, category: "Other", servingOptions: [{label:"2 tablespoons",amount:1,carbs:2},{label:"1 tablespoon",amount:0.5,carbs:1},{label:"1 squeeze (about 1 tablespoon)",amount:0.5,carbs:1}] },
     { name: "Jelly or Jam", serving: "1 tablespoon", carbs: 13, category: "Other", servingOptions: [{label:"1 tablespoon",amount:1,carbs:13},{label:"1 teaspoon",amount:1/3,carbs:4.3},{label:"1 squeeze packet (about 1 tablespoon)",amount:1,carbs:13}] },
@@ -1825,12 +1867,17 @@ const foods = [
     { name: "Hamburger Bun", serving: "1 bun", carbs: 28, category: "Grains", servingOptions: [{label:"1 bun",amount:1,carbs:28},{label:"1/2 bun",amount:0.5,carbs:14}] },
     { name: "Hot Dog Bun", serving: "1 bun", carbs: 24, category: "Grains", servingOptions: [{label:"1 bun",amount:1,carbs:24},{label:"1/2 bun",amount:0.5,carbs:12}] },
     { name: "English Muffin", serving: "1 muffin", carbs: 26, category: "Grains", servingOptions: [{label:"1 muffin",amount:1,carbs:26},{label:"1/2 muffin",amount:0.5,carbs:13}] },
-    { name: "Plain Bagel", serving: "1 medium bagel", carbs: 55, category: "Grains", servingOptions: [{label:"1 medium bagel",amount:1,carbs:55},{label:"1/2 bagel",amount:0.5,carbs:27.5}] },
-    { name: "Pita Bread", serving: "1 medium pita", carbs: 33, category: "Grains", servingOptions: [{label:"1 medium pita",amount:1,carbs:33},{label:"1/2 pita",amount:0.5,carbs:16.5}] },
+    { name: "Plain Bagel", serving: "1 medium bagel", carbs: 55, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=bagel+plain", category: "Grains", servingOptions: [{label:"1 medium bagel",amount:1,carbs:55},{label:"1/2 bagel",amount:0.5,carbs:27.5},{label:"1 mini bagel",amount:0.5,carbs:27.5},{label:"1 large bagel",amount:1.4,carbs:77}] },
+    { name: "Pita Bread", serving: "1 medium pita", carbs: 33, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=pita+bread", category: "Grains", servingOptions: [{label:"1 medium pita",amount:1,carbs:33},{label:"1/2 pita",amount:0.5,carbs:16.5},{label:"1 small pita",amount:0.75,carbs:24.8}] },
     { name: "Naan", serving: "1/2 piece", carbs: 26, category: "Grains", servingOptions: [{label:"1/2 piece",amount:0.5,carbs:26},{label:"1 whole piece",amount:1,carbs:52}] },
     { name: "Saltine Crackers", serving: "5 crackers", carbs: 11, category: "Grains", servingOptions: [{label:"5 crackers",amount:1,carbs:11},{label:"1 cracker",amount:0.2,carbs:2.2},{label:"2 crackers",amount:0.4,carbs:4.4},{label:"10 crackers",amount:2,carbs:22}] },
-    { name: "Potato Chips", serving: "1 oz (about 15 chips)", carbs: 15, category: "Snacks", servingOptions: [{label:"1 oz (about 15 chips)",amount:1,carbs:15},{label:"1 handful (about 1 oz)",amount:1,carbs:15},{label:"2 oz",amount:2,carbs:30}] },
-    { name: "Tortilla Chips", serving: "1 oz (about 10 chips)", carbs: 19, category: "Snacks", servingOptions: [{label:"1 oz (about 10 chips)",amount:1,carbs:19},{label:"1 handful",amount:1,carbs:19},{label:"2 oz",amount:2,carbs:38}] },
+    { name: "Ritz Original Crackers", serving: "5 crackers (16 g)", carbs: 10, nutritionSource: "https://smartlabel.mondelez.info/044000058241-0002-en-US/index.html", category: "Snacks", labelDependent: true, servingOptions: [{label:"5 crackers (16 g)",amount:1,carbs:10},{label:"1 cracker",amount:0.2,carbs:2},{label:"10 crackers (32 g)",amount:2,carbs:20}] },
+    { name: "Potato Chips", serving: "1 oz (about 15 chips)", carbs: 15, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=potato+chips", category: "Snacks", servingOptions: [{label:"1 oz (about 15 chips)",amount:1,carbs:15},{label:"1 handful (about 1 oz)",amount:1,carbs:15},{label:"1 small snack bag (1.5 oz)",amount:1.5,carbs:22.5},{label:"2 oz",amount:2,carbs:30}] },
+    { name: "Tortilla Chips", serving: "1 oz (about 10 chips)", carbs: 19, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=tortilla+chips", category: "Snacks", servingOptions: [{label:"1 oz (about 10 chips)",amount:1,carbs:19},{label:"1 handful",amount:1,carbs:19},{label:"5 chips (about 14 g)",amount:0.5,carbs:9.5},{label:"2 oz",amount:2,carbs:38}] },
+    { name: "Corn Chips", serving: "1 oz (28 g)", carbs: 16, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=corn+chips", category: "Snacks", servingOptions: [{label:"1 oz (28 g)",amount:1,carbs:16},{label:"1/2 oz (14 g)",amount:0.5,carbs:8},{label:"2 oz (56 g)",amount:2,carbs:32}] },
+    { name: "Baked Potato, plain", serving: "1 medium potato (173 g)", carbs: 37, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=potato+baked+flesh+skin", category: "Vegetables", servingOptions: [{label:"1 medium potato (173 g)",amount:1,carbs:37},{label:"1/2 medium potato",amount:0.5,carbs:18.5},{label:"1 small potato",amount:0.7,carbs:25.9},{label:"1 large potato",amount:1.4,carbs:51.8}] },
+    { name: "Hash Brown Patty", serving: "1 patty (about 56 g)", carbs: 17, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=hash+brown+potato+patty", category: "Vegetables", labelDependent: true, servingOptions: [{label:"1 patty (about 56 g)",amount:1,carbs:17},{label:"1/2 patty",amount:0.5,carbs:8.5},{label:"2 patties",amount:2,carbs:34}] },
+    { name: "Tater Tots", serving: "10 pieces (about 85 g)", carbs: 25, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=tater+tots+potatoes", category: "Vegetables", labelDependent: true, servingOptions: [{label:"10 pieces (about 85 g)",amount:1,carbs:25},{label:"5 pieces",amount:0.5,carbs:12.5},{label:"20 pieces",amount:2,carbs:50}] },
     { name: "Pretzels", serving: "1 oz (about 10 twists)", carbs: 23, category: "Snacks", servingOptions: [{label:"1 oz (about 10 twists)",amount:1,carbs:23},{label:"1 handful",amount:1,carbs:23},{label:"2 oz",amount:2,carbs:46}] },
     { name: "Popcorn, popped", serving: "3 cups", carbs: 18, category: "Snacks", servingOptions: [{label:"3 cups popped",amount:1,carbs:18},{label:"1 cup popped",amount:1/3,carbs:6},{label:"1 handful (about 1 cup)",amount:1/3,carbs:6}] },
     { name: "Corn Flakes Cereal", serving: "1 cup", carbs: 24, category: "Grains", servingOptions: [{label:"1 cup",amount:1,carbs:24},{label:"1/2 cup",amount:0.5,carbs:12}] },
@@ -1874,6 +1921,32 @@ const foods = [
     { name: "Diet Coke", serving: "1 can (12 fl oz)", carbs: 0, category: "Drinks", servingOptions: [{label:"1 can (12 fl oz)",amount:1,carbs:0},{label:"1/2 can",amount:0.5,carbs:0},{label:"20 fl oz bottle",amount:5/3,carbs:0}] },
     { name: "Sprite", serving: "1 can (12 fl oz)", carbs: 38, category: "Drinks", servingOptions: [{label:"1 can (12 fl oz)",amount:1,carbs:38},{label:"1/2 can",amount:0.5,carbs:19},{label:"20 fl oz bottle",amount:5/3,carbs:63}] },
     { name: "Sprite Zero Sugar", serving: "1 can (12 fl oz)", carbs: 0, category: "Drinks", servingOptions: [{label:"1 can (12 fl oz)",amount:1,carbs:0},{label:"1/2 can",amount:0.5,carbs:0},{label:"20 fl oz bottle",amount:5/3,carbs:0}] },
+    { name: "Green Tea, unsweetened, brewed", serving: "1 cup (8 fl oz)", carbs: 0, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=green+tea+brewed", category: "Drinks", servingOptions: [{label:"1 cup (8 fl oz)",amount:1,carbs:0},{label:"1 mug (12 fl oz)",amount:1.5,carbs:0}] },
+    { name: "Bottled Iced Tea, sweetened", serving: "12 fl oz", carbs: 22, category: "Drinks", labelDependent: true, servingOptions: [{label:"12 fl oz",amount:1,carbs:22},{label:"16 fl oz bottle",amount:4/3,carbs:29.3},{label:"20 fl oz bottle",amount:5/3,carbs:36.7}] },
+    { name: "Arnold Palmer, half tea and half lemonade", serving: "12 fl oz", carbs: 18, category: "Drinks", labelDependent: true, servingOptions: [{label:"12 fl oz",amount:1,carbs:18},{label:"16 fl oz bottle",amount:4/3,carbs:24},{label:"20 fl oz bottle",amount:5/3,carbs:30}] },
+    { name: "Diet Lemonade", serving: "1 cup (8 fl oz)", carbs: 0, category: "Drinks", labelDependent: true, servingOptions: [{label:"1 cup (8 fl oz)",amount:1,carbs:0},{label:"12 fl oz",amount:1.5,carbs:0},{label:"16 fl oz",amount:2,carbs:0}] },
+    { name: "Dr Pepper, regular", serving: "1 can (12 fl oz)", carbs: 39, category: "Drinks", labelDependent: true, servingOptions: [{label:"1 can (12 fl oz)",amount:1,carbs:39},{label:"1/2 can",amount:0.5,carbs:19.5},{label:"20 fl oz bottle",amount:5/3,carbs:65}] },
+    { name: "Mountain Dew, regular", serving: "1 can (12 fl oz)", carbs: 46, category: "Drinks", labelDependent: true, servingOptions: [{label:"1 can (12 fl oz)",amount:1,carbs:46},{label:"1/2 can",amount:0.5,carbs:23},{label:"20 fl oz bottle",amount:5/3,carbs:76.7}] },
+    { name: "Root Beer, regular", serving: "1 can (12 fl oz)", carbs: 43, category: "Drinks", labelDependent: true, servingOptions: [{label:"1 can (12 fl oz)",amount:1,carbs:43},{label:"1/2 can",amount:0.5,carbs:21.5},{label:"20 fl oz bottle",amount:5/3,carbs:71.7}] },
+    { name: "Ginger Ale, regular", serving: "1 can (12 fl oz)", carbs: 33, category: "Drinks", labelDependent: true, servingOptions: [{label:"1 can (12 fl oz)",amount:1,carbs:33},{label:"1/2 can",amount:0.5,carbs:16.5},{label:"20 fl oz bottle",amount:5/3,carbs:55}] },
+    { name: "Orange Soda, regular", serving: "1 can (12 fl oz)", carbs: 43, category: "Drinks", labelDependent: true, servingOptions: [{label:"1 can (12 fl oz)",amount:1,carbs:43},{label:"1/2 can",amount:0.5,carbs:21.5},{label:"20 fl oz bottle",amount:5/3,carbs:71.7}] },
+    { name: "Tonic Water, regular", serving: "1 cup (8 fl oz)", carbs: 22, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=tonic+water", category: "Drinks", labelDependent: true, servingOptions: [{label:"1 cup (8 fl oz)",amount:1,carbs:22},{label:"1/2 cup (4 fl oz)",amount:0.5,carbs:11},{label:"1 can (12 fl oz)",amount:1.5,carbs:33}] },
+    { name: "Sparkling Water, unsweetened", serving: "1 can (12 fl oz)", carbs: 0, category: "Drinks", labelDependent: true, servingOptions: [{label:"1 can (12 fl oz)",amount:1,carbs:0},{label:"1 bottle (16.9 fl oz)",amount:1.408,carbs:0},{label:"1 liter",amount:2.817,carbs:0}] },
+    { name: "Gatorade Thirst Quencher", serving: "1 bottle (20 fl oz)", carbs: 34, nutritionSource: "https://www.gatorade.com/sports-drinks/gatorade-thirst-quencher/glacier-freeze-052000324860", category: "Drinks", labelDependent: true, servingOptions: [{label:"1 bottle (20 fl oz)",amount:1,carbs:34},{label:"12 fl oz",amount:0.6,carbs:20.4},{label:"1/2 bottle (10 fl oz)",amount:0.5,carbs:17}] },
+    { name: "Energy Drink, regular", serving: "1 can (8.4 fl oz)", carbs: 27, category: "Drinks", labelDependent: true, servingOptions: [{label:"1 can (8.4 fl oz)",amount:1,carbs:27},{label:"1/2 can",amount:0.5,carbs:13.5},{label:"1 can (16 fl oz)",amount:16/8.4,carbs:51.4}] },
+    { name: "Beer, regular", serving: "1 can (12 fl oz; USDA estimate)", carbs: 12.6, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=beer+regular", category: "Drinks", labelDependent: true, servingOptions: [{label:"1 can (12 fl oz)",amount:1,carbs:12.6},{label:"1 bottle (12 fl oz)",amount:1,carbs:12.6},{label:"1 pint (16 fl oz)",amount:4/3,carbs:16.8}] },
+    { name: "Beer, light", serving: "1 can (12 fl oz; USDA estimate)", carbs: 5.8, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=beer+light", category: "Drinks", labelDependent: true, servingOptions: [{label:"1 can (12 fl oz)",amount:1,carbs:5.8},{label:"1 bottle (12 fl oz)",amount:1,carbs:5.8},{label:"1 pint (16 fl oz)",amount:4/3,carbs:7.7}] },
+    { name: "Red Table Wine, dry", serving: "1 glass (5 fl oz; USDA estimate)", carbs: 3.8, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=wine+table+red", category: "Drinks", labelDependent: true, servingOptions: [{label:"1 glass (5 fl oz)",amount:1,carbs:3.8},{label:"1/2 glass (2.5 fl oz)",amount:0.5,carbs:1.9},{label:"1 bottle (25.4 fl oz)",amount:5.08,carbs:19.3}] },
+    { name: "White Table Wine, dry", serving: "1 glass (5 fl oz; USDA estimate)", carbs: 3.8, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=wine+table+white", category: "Drinks", labelDependent: true, servingOptions: [{label:"1 glass (5 fl oz)",amount:1,carbs:3.8},{label:"1/2 glass (2.5 fl oz)",amount:0.5,carbs:1.9},{label:"1 bottle (25.4 fl oz)",amount:5.08,carbs:19.3}] },
+    { name: "Vodka, unflavored, 80 proof", serving: "1 shot (1.5 fl oz)", carbs: 0, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=vodka+80+proof", category: "Drinks", labelDependent: true, servingOptions: [{label:"1 shot (1.5 fl oz)",amount:1,carbs:0},{label:"1/2 shot (0.75 fl oz)",amount:0.5,carbs:0},{label:"2 shots (3 fl oz)",amount:2,carbs:0}] },
+    { name: "Whiskey, unflavored, 80 proof", serving: "1 shot (1.5 fl oz)", carbs: 0, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=whiskey+80+proof", category: "Drinks", labelDependent: true, servingOptions: [{label:"1 shot (1.5 fl oz)",amount:1,carbs:0},{label:"1/2 shot (0.75 fl oz)",amount:0.5,carbs:0},{label:"2 shots (3 fl oz)",amount:2,carbs:0}] },
+    { name: "Gin, unflavored, 80 proof", serving: "1 shot (1.5 fl oz)", carbs: 0, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=gin+80+proof", category: "Drinks", labelDependent: true, servingOptions: [{label:"1 shot (1.5 fl oz)",amount:1,carbs:0},{label:"1/2 shot (0.75 fl oz)",amount:0.5,carbs:0},{label:"2 shots (3 fl oz)",amount:2,carbs:0}] },
+    { name: "Rum, unflavored, 80 proof", serving: "1 shot (1.5 fl oz)", carbs: 0, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=rum+80+proof", category: "Drinks", labelDependent: true, servingOptions: [{label:"1 shot (1.5 fl oz)",amount:1,carbs:0},{label:"1/2 shot (0.75 fl oz)",amount:0.5,carbs:0},{label:"2 shots (3 fl oz)",amount:2,carbs:0}] },
+    { name: "Tequila, unflavored, 80 proof", serving: "1 shot (1.5 fl oz)", carbs: 0, category: "Drinks", labelDependent: true, servingOptions: [{label:"1 shot (1.5 fl oz)",amount:1,carbs:0},{label:"1/2 shot (0.75 fl oz)",amount:0.5,carbs:0},{label:"2 shots (3 fl oz)",amount:2,carbs:0}] },
+    { name: "Margarita, prepared sweetened", serving: "1 glass (4 fl oz; recipe estimate)", carbs: 13, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=margarita+prepared", category: "Drinks", labelDependent: true, servingOptions: [{label:"1 glass (4 fl oz)",amount:1,carbs:13},{label:"1/2 glass (2 fl oz)",amount:0.5,carbs:6.5},{label:"1 restaurant pour (8 fl oz)",amount:2,carbs:26}] },
+    { name: "Piña Colada, prepared", serving: "1 drink (4.5 fl oz; USDA recipe estimate)", carbs: 32, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=pina+colada+prepared", category: "Drinks", labelDependent: true, servingOptions: [{label:"1 drink (4.5 fl oz)",amount:1,carbs:32},{label:"1/2 drink",amount:0.5,carbs:16},{label:"2 drinks",amount:2,carbs:64}] },
+    { name: "Hard Cider", serving: "1 bottle (12 fl oz)", carbs: 21, category: "Drinks", labelDependent: true, servingOptions: [{label:"1 bottle (12 fl oz)",amount:1,carbs:21},{label:"1/2 bottle",amount:0.5,carbs:10.5},{label:"1 pint (16 fl oz)",amount:4/3,carbs:28}] },
+    { name: "Hard Seltzer", serving: "1 can (12 fl oz)", carbs: 2, category: "Drinks", labelDependent: true, servingOptions: [{label:"1 can (12 fl oz)",amount:1,carbs:2},{label:"1/2 can",amount:0.5,carbs:1},{label:"2 cans",amount:2,carbs:4}] },
     { name: "Hidden Valley Original Ranch", serving: "2 tablespoons", carbs: 1, category: "Other", servingOptions: [{label:"2 tablespoons",amount:1,carbs:1},{label:"1 tablespoon",amount:0.5,carbs:0.5},{label:"1 squeeze (about 1 tablespoon)",amount:0.5,carbs:0.5}] },
     { name: "Heinz Tomato Ketchup", serving: "1 tablespoon", carbs: 5, category: "Other", servingOptions: [{label:"1 tablespoon",amount:1,carbs:5},{label:"1 teaspoon",amount:1/3,carbs:1.7},{label:"1 squeeze (about 1 tablespoon)",amount:1,carbs:5}] },
     { name: "Jif Creamy Peanut Butter", serving: "2 tablespoons", carbs: 8, category: "Other", servingOptions: [{label:"2 tablespoons",amount:1,carbs:8},{label:"1 tablespoon",amount:0.5,carbs:4},{label:"1 squeeze packet (2 tablespoons)",amount:1,carbs:8}] },
@@ -1892,7 +1965,7 @@ const foods = [
     { name: "Oscar Mayer Beef Bologna", serving: "1 slice", carbs: 1, category: "Protein", carbsPerOunce: 1, servingOptions: [{label:"1 slice (1 oz)",amount:1,carbs:1},{label:"2 slices",amount:2,carbs:2},{label:"4 slices",amount:4,carbs:4}] },
     { name: "Oreos (OREO Original Cookies)", serving: "3 cookies", carbs: 25, category: "Snacks", carbsPerOunce: 20.9, servingOptions: [{label:"3 cookies",amount:1,carbs:25},{label:"1 cookie",amount:1/3,carbs:8.3},{label:"6 cookies",amount:2,carbs:50},{label:"1 snack pack (6 cookies)",amount:2,carbs:50}] },
     { name: "Chocolate Ice Cream", serving: "1/2 cup", carbs: 14, category: "Dessert", carbsPerOunce: 5.1, servingOptions: [{label:"1/2 cup",amount:1,carbs:14},{label:"2/3 cup",amount:4/3,carbs:19},{label:"1 cup",amount:2,carbs:28}] },
-    { name: "Doritos Nacho Cheese", serving: "1 oz (about 12 chips)", carbs: 17, category: "Snacks", carbsPerOunce: 17.2, servingOptions: [{label:"1 oz (about 12 chips)",amount:1,carbs:17},{label:"1/2 oz (about 6 chips)",amount:0.5,carbs:8.5},{label:"2 oz (about 24 chips)",amount:2,carbs:34},{label:"1 small bag (2.5 oz)",amount:2.5,carbs:42.5}] },
+    { name: "Doritos Nacho Cheese", serving: "1 oz (about 12 chips)", carbs: 17, nutritionSource: "https://smartlabel.pepsico.info/028400019903-0002-en-US/index.html", category: "Snacks", carbsPerOunce: 17.2, labelDependent: true, servingOptions: [{label:"1 oz (about 12 chips)",amount:1,carbs:17},{label:"1/2 oz (about 6 chips)",amount:0.5,carbs:8.5},{label:"1 small snack bag (1 1/8 oz)",amount:1.125,carbs:19.1},{label:"2 oz (about 24 chips)",amount:2,carbs:34},{label:"1 small bag (2.5 oz)",amount:2.5,carbs:42.5}] },
     { name: "Pepsi", serving: "1 can (12 fl oz)", carbs: 41, category: "Drinks", servingOptions: [{label:"1 can (12 fl oz)",amount:1,carbs:41},{label:"1 mini can (7.5 fl oz)",amount:0.625,carbs:25.6},{label:"1 bottle (16.9 fl oz)",amount:1.408,carbs:57.7},{label:"1 bottle (20 fl oz)",amount:1.667,carbs:68.3}] },
     { name: "Pepsi Zero Sugar", serving: "1 can (12 fl oz)", carbs: 0, category: "Drinks", servingOptions: [{label:"1 can (12 fl oz)",amount:1,carbs:0},{label:"1 mini can (7.5 fl oz)",amount:0.625,carbs:0},{label:"1 bottle (16.9 fl oz)",amount:1.408,carbs:0},{label:"1 bottle (20 fl oz)",amount:1.667,carbs:0}] },
     { name: "Cheetos Crunchy Cheese Snacks", serving: "1 oz (about 21 pieces)", carbs: 15, category: "Snacks", carbsPerOunce: 15.2, servingOptions: [{label:"1 oz (about 21 pieces)",amount:1,carbs:15},{label:"1/2 oz",amount:0.5,carbs:7.5},{label:"2 oz",amount:2,carbs:30},{label:"1 small bag (about 1 oz)",amount:1,carbs:15}] },
@@ -1945,7 +2018,7 @@ const foods = [
     { name: "Evaporated Milk, canned, with added vitamin A", serving: "1/2 cup (126 g)", carbs: 12.6, category: "Dairy", servingOptions: [{label:"1/2 cup (126 g)",amount:1,carbs:12.6},{label:"1 fl oz (31.5 g)",amount:0.25,carbs:3.2},{label:"1 cup (252 g)",amount:2,carbs:25.2}] },
     { name: "Sweetened Condensed Milk, canned", serving: "1 fl oz (38.2 g)", carbs: 20.8, category: "Dairy", servingOptions: [{label:"1 fl oz (38.2 g)",amount:1,carbs:20.8},{label:"2 fl oz (76.4 g)",amount:2,carbs:41.6},{label:"1 cup (306 g)",amount:306/38.2,carbs:166.5}] },
     { name: "Plain Yogurt, whole milk", serving: "1 cup (245 g)", carbs: 11.4, category: "Dairy", servingOptions: [{label:"1 cup (245 g)",amount:1,carbs:11.4},{label:"1 container (6 oz; 170 g)",amount:170/245,carbs:7.9},{label:"1 container (8 oz; 227 g)",amount:227/245,carbs:10.6},{label:"1/2 cup (122.5 g)",amount:0.5,carbs:5.7}] },
-    { name: "Heavy Whipping Cream", serving: "1 tablespoon (15 g)", carbs: 0.4, category: "Dairy", servingOptions: [{label:"1 tablespoon (15 g)",amount:1,carbs:0.4},{label:"1 fl oz (29.8 g)",amount:29.8/15,carbs:0.8},{label:"1 cup whipped (120 g)",amount:8,carbs:3.4},{label:"1 cup fluid (238 g)",amount:238/15,carbs:6.8}] },
+    { name: "Heavy Whipping Cream", serving: "1 tablespoon (15 g)", carbs: 0.4, category: "Dairy", servingOptions: [{label:"1 tablespoon (15 g)",amount:1,carbs:0.4},{label:"1 fl oz (29.8 g)",amount:29.8/15,carbs:0.8},{label:"1 cup whipped (120 g)",amount:8,carbs:3.4},{label:"1 cup fluid (238 g)",amount:238/15,carbs:6.8},{label:"1/4 cup fluid (60 g)",amount:4,carbs:1.6}] },
     { name: "Raspberries", serving: "1 cup (123 g)", carbs: 14.6, category: "Fruit", servingOptions: [{label:"1 cup (123 g)",amount:1,carbs:14.6},{label:"1/2 cup (61.5 g)",amount:0.5,carbs:7.3},{label:"10 raspberries (19 g)",amount:19/123,carbs:2.3},{label:"1 pint as purchased, yields (312 g)",amount:312/123,carbs:37.1}] },
     { name: "Blackberries", serving: "1 cup (144 g)", carbs: 13.8, category: "Fruit", servingOptions: [{label:"1 cup (144 g)",amount:1,carbs:13.8},{label:"1/2 cup (72 g)",amount:0.5,carbs:6.9},{label:"2 cups (288 g)",amount:2,carbs:27.7}] },
     { name: "Kiwifruit, green", serving: "1 fruit (69 g)", carbs: 10.1, category: "Fruit", servingOptions: [{label:"1 fruit (69 g)",amount:1,carbs:10.1},{label:"1/2 fruit (34.5 g)",amount:0.5,carbs:5.1},{label:"1 NLEA serving (148 g)",amount:148/69,carbs:21.8},{label:"1 cup sliced (180 g)",amount:180/69,carbs:26.5}] },
@@ -1976,7 +2049,9 @@ const foods = [
     { name: "Fruit Punch Drink, canned, without added nutrients", serving: "1 cup (8 fl oz; 248 g)", carbs: 29.8, category: "Drinks", servingOptions: [{label:"1 cup (8 fl oz; 248 g)",amount:1,carbs:29.8},{label:"6.75 fl oz (210 g)",amount:210/248,carbs:25.2},{label:"1/2 cup (124 g)",amount:0.5,carbs:14.9}] },
     { name: "Grape Juice, canned or bottled, unsweetened, with added ascorbic acid", serving: "1 cup (253 g)", carbs: 37.4, category: "Drinks", servingOptions: [{label:"1 cup (253 g)",amount:1,carbs:37.4},{label:"1/2 cup (126.5 g)",amount:0.5,carbs:18.7},{label:"1 fl oz (31.6 g)",amount:31.6/253,carbs:4.7},{label:"2 cups (506 g)",amount:2,carbs:74.9}] },
     { name: "Sweet Pickle Relish", serving: "1 tablespoon (15 g)", carbs: 5.3, category: "Other", servingOptions: [{label:"1 tablespoon (15 g)",amount:1,carbs:5.3},{label:"1 packet (2/3 tablespoon; 10 g)",amount:10/15,carbs:3.5},{label:"2 tablespoons (30 g)",amount:2,carbs:10.5},{label:"1 cup (245 g)",amount:245/15,carbs:86.0}] },
-    { name: "Worcestershire Sauce", serving: "1 tablespoon (17 g)", carbs: 3.3, category: "Other", servingOptions: [{label:"1 tablespoon (17 g)",amount:1,carbs:3.3},{label:"1 teaspoon (5.67 g)",amount:1/3,carbs:1.1},{label:"2 tablespoons (34 g)",amount:2,carbs:6.5},{label:"1 cup (275 g)",amount:275/17,carbs:52.8}] },
+    { name: "Worcestershire Sauce", serving: "1 tablespoon (17 g)", carbs: 3.3, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=worcestershire+sauce", category: "Other", servingOptions: [{label:"1 tablespoon (17 g)",amount:1,carbs:3.3},{label:"1 teaspoon (5.67 g)",amount:1/3,carbs:1.1},{label:"2 tablespoons (34 g)",amount:2,carbs:6.5},{label:"1 cup (275 g)",amount:275/17,carbs:52.8}] },
+    { name: "Oyster Sauce", serving: "1 tablespoon (18 g; generic USDA estimate)", carbs: 2, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=oyster+sauce", category: "International Foods", labelDependent: true, servingOptions: [{label:"1 tablespoon (18 g; generic USDA estimate)",amount:1,carbs:2},{label:"1 teaspoon (6 g; generic USDA estimate)",amount:1/3,carbs:0.7},{label:"2 tablespoons (36 g; generic USDA estimate)",amount:2,carbs:4}] },
+    { name: "A.1. Original Steak Sauce", serving: "1 tablespoon (17 g)", carbs: 3, nutritionSource: "https://www.kraftheinz.com/a1/products/00054400000054-original-steak-sauce", category: "Condiments", labelDependent: true, servingOptions: [{label:"1 tablespoon (17 g)",amount:1,carbs:3},{label:"1 teaspoon",amount:1/3,carbs:1},{label:"2 tablespoons (34 g)",amount:2,carbs:6}] },
     { name: "Teriyaki Sauce, ready-to-serve", serving: "1 tablespoon (18 g)", carbs: 2.8, category: "Other", servingOptions: [{label:"1 tablespoon (18 g)",amount:1,carbs:2.8},{label:"1 fl oz (36 g)",amount:2,carbs:5.6},{label:"1/4 cup (72 g)",amount:4,carbs:11.2},{label:"1 cup (288 g)",amount:16,carbs:44.9}] },
     { name: "Fish Sticks, frozen, prepared", serving: "1 piece, 4 x 2 x 1/2 inch (57 g)", carbs: 12.4, category: "Protein", servingOptions: [{label:"1 piece, 4 x 2 x 1/2 inch (57 g)",amount:1,carbs:12.4},{label:"1 stick, 4 x 1 x 1/2 inch (28 g)",amount:28/57,carbs:6.1},{label:"2 pieces (114 g)",amount:2,carbs:24.7}] },
     { name: "Chicken Pot Pie, frozen entree, prepared", serving: "1 pie (302 g)", carbs: 58.0, category: "Other", servingOptions: [{label:"1 pie (302 g)",amount:1,carbs:58.0},{label:"1/2 pie (151 g)",amount:0.5,carbs:29.0},{label:"1/4 pie (75.5 g)",amount:0.25,carbs:14.5}] },
@@ -1987,8 +2062,78 @@ const foods = [
     { name: "Chocolate Pudding, ready-to-eat", serving: "1 refrigerated container (4 oz; 108 g)", carbs: 24.8, category: "Dessert", servingOptions: [{label:"1 refrigerated container (4 oz; 108 g)",amount:1,carbs:24.8},{label:"1 shelf-stable container (3.5 oz; 98 g)",amount:98/108,carbs:22.5},{label:"1/2 refrigerated container (54 g)",amount:0.5,carbs:12.4},{label:"2 refrigerated containers (216 g)",amount:2,carbs:49.7}] },
     { name: "Chocolate Cake, prepared from recipe without frosting", serving: "1 piece, 1/12 of 9-inch cake (95 g)", carbs: 50.7, category: "Dessert", servingOptions: [{label:"1 piece, 1/12 of 9-inch cake (95 g)",amount:1,carbs:50.7},{label:"1/2 piece (47.5 g)",amount:0.5,carbs:25.4},{label:"1 oz (28.35 g)",amount:28.35/95,carbs:15.1},{label:"2 pieces (190 g)",amount:2,carbs:101.5}] },
     { name: "Cake Doughnut, plain, sugared or glazed", serving: "1 medium doughnut (3-inch diameter; 45 g)", carbs: 22.9, category: "Dessert", servingOptions: [{label:"1 medium doughnut (45 g)",amount:1,carbs:22.9},{label:"1/2 doughnut (22.5 g)",amount:0.5,carbs:11.4},{label:"1 oz (28.35 g)",amount:28.35/45,carbs:14.4},{label:"2 doughnuts (90 g)",amount:2,carbs:45.7}] },
-    { name: "Farina, cooked with water and salt", serving: "1 cup (233 g)", carbs: 25.4, category: "Grains", servingOptions: [{label:"1 cup (233 g)",amount:1,carbs:25.4},{label:"1/2 cup (116.5 g)",amount:0.5,carbs:12.7},{label:"1/4 cup (58.25 g)",amount:0.25,carbs:6.3},{label:"2 cups (466 g)",amount:2,carbs:50.8}] }
+    { name: "Farina, cooked with water and salt", serving: "1 cup (233 g)", carbs: 25.4, category: "Grains", servingOptions: [{label:"1 cup (233 g)",amount:1,carbs:25.4},{label:"1/2 cup (116.5 g)",amount:0.5,carbs:12.7},{label:"1/4 cup (58.25 g)",amount:0.25,carbs:6.3},{label:"2 cups (466 g)",amount:2,carbs:50.8}] },
 
+    // Pantry staples, toppings, and globally used condiments. USDA values are rounded
+    // household estimates; packaged sauces vary, so check the nutrition label for the brand used.
+    { name: "Apple Cider Vinegar", serving: "1 tablespoon", carbs: 0.1, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=vinegar+apple+cider", category: "Condiments", servingOptions: [{label:"1 tablespoon",amount:1,carbs:0.1},{label:"1 teaspoon",amount:1/3,carbs:0},{label:"1/4 cup",amount:4,carbs:0.4}] },
+    { name: "Rice Vinegar", serving: "1 tablespoon", carbs: 0.1, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=vinegar+rice", category: "Condiments", servingOptions: [{label:"1 tablespoon",amount:1,carbs:0.1},{label:"1 teaspoon",amount:1/3,carbs:0},{label:"1/4 cup",amount:4,carbs:0.4}] },
+    { name: "Balsamic Vinegar", serving: "1 tablespoon", carbs: 2.7, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=vinegar+balsamic", category: "Condiments", servingOptions: [{label:"1 tablespoon",amount:1,carbs:2.7},{label:"1 teaspoon",amount:1/3,carbs:0.9},{label:"2 tablespoons",amount:2,carbs:5.4}] },
+    { name: "Avocado Oil", serving: "1 tablespoon", carbs: 0, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=oil+avocado", category: "Oils", servingOptions: [{label:"1 tablespoon",amount:1,carbs:0},{label:"1 teaspoon",amount:1/3,carbs:0}] },
+    { name: "Ghee", serving: "1 tablespoon", carbs: 0, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=ghee", category: "Oils", servingOptions: [{label:"1 tablespoon",amount:1,carbs:0},{label:"1 teaspoon",amount:1/3,carbs:0}] },
+    { name: "Dried Thyme", serving: "1 teaspoon", carbs: 0.8, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=thyme+dried", category: "Spices", servingOptions: [{label:"1 teaspoon",amount:1,carbs:0.8},{label:"1 tablespoon",amount:3,carbs:2.4}] },
+    { name: "Rosemary, dried", serving: "1 teaspoon", carbs: 0.7, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=rosemary+dried", category: "Spices", servingOptions: [{label:"1 teaspoon",amount:1,carbs:0.7},{label:"1 tablespoon",amount:3,carbs:2.1}] },
+    { name: "Turmeric, ground", serving: "1 teaspoon", carbs: 1.4, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=spices+turmeric+ground", category: "Spices", servingOptions: [{label:"1 teaspoon",amount:1,carbs:1.4},{label:"1 tablespoon",amount:3,carbs:4.2}] },
+    { name: "Coriander, ground", serving: "1 teaspoon", carbs: 1.1, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=spices+coriander+seed", category: "Spices", servingOptions: [{label:"1 teaspoon",amount:1,carbs:1.1},{label:"1 tablespoon",amount:3,carbs:3.3}] },
+    { name: "Curry Powder", serving: "1 teaspoon", carbs: 1.2, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=spices+curry+powder", category: "Spices", servingOptions: [{label:"1 teaspoon",amount:1,carbs:1.2},{label:"1 tablespoon",amount:3,carbs:3.6}] },
+    { name: "Shredded Lettuce", serving: "1 cup", carbs: 1, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=lettuce+green+leaf+raw", category: "Toppings", servingOptions: [{label:"1 cup",amount:1,carbs:1},{label:"1/2 cup",amount:0.5,carbs:0.5},{label:"2 cups",amount:2,carbs:2}] },
+    { name: "Monterey Jack Cheese, shredded", serving: "1/4 cup (28 g)", carbs: 0.5, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=cheese+monterey+jack", category: "Toppings", servingOptions: [{label:"1/4 cup (28 g)",amount:1,carbs:0.5},{label:"2 tablespoons (14 g)",amount:0.5,carbs:0.25},{label:"1/2 cup (56 g)",amount:2,carbs:1}] },
+    { name: "Mexican Blend Cheese, shredded", serving: "1/4 cup", carbs: 1, category: "Toppings", labelDependent: true, servingOptions: [{label:"1/4 cup",amount:1,carbs:1},{label:"2 tablespoons",amount:0.5,carbs:0.5},{label:"1/2 cup",amount:2,carbs:2}] },
+    { name: "Black Olives, sliced", serving: "1/4 cup", carbs: 1, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=olives+ripe+canned", category: "Toppings", servingOptions: [{label:"1/4 cup",amount:1,carbs:1},{label:"2 tablespoons",amount:0.5,carbs:0.5},{label:"1/2 cup",amount:2,carbs:2}] },
+    { name: "Pickled Jalapeños", serving: "1 tablespoon", carbs: 0.3, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=jalapeno+pickled", category: "Toppings", servingOptions: [{label:"1 tablespoon",amount:1,carbs:0.3},{label:"1/4 cup",amount:4,carbs:1.2}] },
+    { name: "Kimchi", serving: "1/2 cup", carbs: 2, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=kimchi", category: "International Foods", servingOptions: [{label:"1/2 cup",amount:1,carbs:2},{label:"1/4 cup",amount:0.5,carbs:1},{label:"1 cup",amount:2,carbs:4}] },
+    { name: "Tahini", serving: "1 tablespoon", carbs: 3, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=tahini", category: "International Foods", servingOptions: [{label:"1 tablespoon",amount:1,carbs:3},{label:"2 tablespoons",amount:2,carbs:6}] },
+    { name: "Miso Paste", serving: "1 tablespoon", carbs: 3, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=miso", category: "International Foods", servingOptions: [{label:"1 tablespoon",amount:1,carbs:3},{label:"1 teaspoon",amount:1/3,carbs:1},{label:"2 tablespoons",amount:2,carbs:6}] },
+    { name: "Gochujang", serving: "1 tablespoon", carbs: 7, category: "International Foods", labelDependent: true, servingOptions: [{label:"1 tablespoon",amount:1,carbs:7},{label:"1 teaspoon",amount:1/3,carbs:2.3}] },
+    { name: "Fish Sauce", serving: "1 tablespoon", carbs: 0, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=fish+sauce", category: "International Foods", servingOptions: [{label:"1 tablespoon",amount:1,carbs:0},{label:"1 teaspoon",amount:1/3,carbs:0}] },
+    { name: "Tamari", serving: "1 tablespoon", carbs: 1, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=soy+sauce+tamari", category: "International Foods", labelDependent: true, servingOptions: [{label:"1 tablespoon",amount:1,carbs:1},{label:"1 teaspoon",amount:1/3,carbs:0.3}] },
+    { name: "Thai Red Curry Paste", serving: "1 tablespoon", carbs: 2, category: "International Foods", labelDependent: true, servingOptions: [{label:"1 tablespoon",amount:1,carbs:2},{label:"1 teaspoon",amount:1/3,carbs:0.7}] },
+    { name: "Sriracha", serving: "1 teaspoon", carbs: 1, category: "Condiments", labelDependent: true, servingOptions: [{label:"1 teaspoon",amount:1,carbs:1},{label:"1 tablespoon",amount:3,carbs:3}] },
+    { name: "Buffalo Wing Sauce", serving: "1 tablespoon", carbs: 0, category: "Condiments", labelDependent: true, servingOptions: [{label:"1 tablespoon",amount:1,carbs:0},{label:"2 tablespoons",amount:2,carbs:0}] },
+    { name: "Salsa Macha", serving: "1 teaspoon", carbs: 1, category: "International Foods", labelDependent: true, servingOptions: [{label:"1 teaspoon",amount:1,carbs:1},{label:"1 tablespoon",amount:3,carbs:3}] },
+    { name: "Pico de Gallo", serving: "2 tablespoons", carbs: 1.5, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=pico+de+gallo", category: "Toppings", labelDependent: true, servingOptions: [{label:"2 tablespoons",amount:1,carbs:1.5},{label:"1/4 cup",amount:2,carbs:3}] },
+    { name: "Guacamole", serving: "2 tablespoons", carbs: 2, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=guacamole", category: "Toppings", servingOptions: [{label:"2 tablespoons",amount:1,carbs:2},{label:"1/4 cup",amount:2,carbs:4}] },
+    // Sweet baking and dessert foods. Generic entries use USDA FoodData Central estimates;
+    // the branded Hershey entries use current manufacturer label servings and can change by package.
+    { name: "Semisweet Chocolate Chips", serving: "1 tablespoon (15 g)", carbs: 10, nutritionSource: "https://www.hersheyland.com/products/hersheys-semi-sweet-chocolate-chips-12-oz-bag.html.html", category: "Baking", labelDependent: true, servingOptions: [{label:"1 tablespoon (15 g)",amount:1,carbs:10},{label:"1/4 cup (60 g)",amount:4,carbs:40},{label:"1/2 cup (120 g)",amount:8,carbs:80}] },
+    { name: "Cocoa Powder, unsweetened", serving: "1 tablespoon (5 g)", carbs: 3.1, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=cocoa+dry+powder+unsweetened", category: "Baking", servingOptions: [{label:"1 tablespoon (5 g)",amount:1,carbs:3.1},{label:"1 teaspoon",amount:1/3,carbs:1},{label:"2 tablespoons (10 g)",amount:2,carbs:6.2}] },
+    { name: "Hot Cocoa Mix, dry", serving: "1 envelope (28 g)", carbs: 24, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=hot+cocoa+mix+powder", category: "Dessert", labelDependent: true, servingOptions: [{label:"1 envelope (28 g)",amount:1,carbs:24},{label:"1 tablespoon",amount:0.25,carbs:6},{label:"2 envelopes",amount:2,carbs:48}] },
+    { name: "Powdered Sugar", serving: "1 tablespoon (8 g)", carbs: 7.5, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=sugars+powdered", category: "Baking", servingOptions: [{label:"1 tablespoon (8 g)",amount:1,carbs:7.5},{label:"1 teaspoon",amount:1/3,carbs:2.5},{label:"1/4 cup (32 g)",amount:4,carbs:30}] },
+    { name: "Brown Sugar, packed", serving: "1 tablespoon (13 g)", carbs: 12.6, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=sugars+brown", category: "Baking", servingOptions: [{label:"1 tablespoon (13 g)",amount:1,carbs:12.6},{label:"1 teaspoon",amount:1/3,carbs:4.2},{label:"1/4 cup (52 g)",amount:4,carbs:50.4}] },
+    { name: "Marshmallows", serving: "1 regular marshmallow (7 g)", carbs: 6, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=marshmallows", category: "Dessert", labelDependent: true, servingOptions: [{label:"1 regular marshmallow (7 g)",amount:1,carbs:6},{label:"4 regular marshmallows (28 g)",amount:4,carbs:24},{label:"1/4 cup mini marshmallows",amount:1,carbs:18}] },
+    { name: "Maple Syrup", serving: "1 tablespoon", carbs: 13.4, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=syrups+maple", category: "Dessert", servingOptions: [{label:"1 tablespoon",amount:1,carbs:13.4},{label:"1 teaspoon",amount:1/3,carbs:4.5},{label:"2 tablespoons",amount:2,carbs:26.8}] },
+    { name: "Pancake Syrup, maple-flavored", serving: "2 tablespoons", carbs: 26, category: "Dessert", labelDependent: true, servingOptions: [{label:"2 tablespoons",amount:1,carbs:26},{label:"1 tablespoon",amount:0.5,carbs:13},{label:"1/4 cup",amount:2,carbs:52}] },
+    { name: "HERSHEY'S Chocolate Syrup", serving: "1 tablespoon (19 g)", carbs: 12, nutritionSource: "https://www.hersheyland.com/products/hersheys-chocolate-syrup-120-oz-jug.html", category: "Dessert", labelDependent: true, servingOptions: [{label:"1 tablespoon (19 g)",amount:1,carbs:12},{label:"2 tablespoons (38 g)",amount:2,carbs:24}] },
+    { name: "HERSHEY'S KISSES Milk Chocolate", serving: "7 pieces (32 g)", carbs: 19, nutritionSource: "https://www.hersheyland.com/products/hersheys-kisses-milk-chocolate-candy-17-9-oz-pack.html", category: "Dessert", labelDependent: true, servingOptions: [{label:"7 pieces (32 g)",amount:1,carbs:19},{label:"1 piece",amount:1/7,carbs:2.7},{label:"14 pieces (64 g)",amount:2,carbs:38}] },
+    // Mexican hot sauces and seasoning blends; brand labels can round tiny serving values down to zero.
+    { name: "Tajín Clásico Seasoning", serving: "1/4 teaspoon (1 g)", carbs: 0, nutritionSource: "https://www.tajin.com/us/tajin-clasico-seasoning-new/", category: "Spices", labelDependent: true, servingOptions: [{label:"1/4 teaspoon (1 g)",amount:1,carbs:0},{label:"1 teaspoon",amount:4,carbs:0},{label:"1 tablespoon",amount:12,carbs:0}] },
+    { name: "Valentina Salsa Picante", serving: "1 teaspoon (5 g)", carbs: 0, nutritionSource: "https://www.webstaurantstore.com/documents/nutrition/125svr34_nutrition.pdf", category: "Condiments", labelDependent: true, servingOptions: [{label:"1 teaspoon (5 g)",amount:1,carbs:0},{label:"1 tablespoon",amount:3,carbs:0}] },
+    { name: "Tapatío Hot Sauce", serving: "1 teaspoon (5 g)", carbs: 0.3, nutritionSource: "https://www.webstaurantstore.com/documents/nutrition/125tap2004_nutrition.pdf", category: "Condiments", labelDependent: true, servingOptions: [{label:"1 teaspoon (5 g)",amount:1,carbs:0.3},{label:"1 tablespoon",amount:3,carbs:0.9}] },
+    { name: "Cholula Original Hot Sauce", serving: "1 teaspoon (5 ml)", carbs: 0.1, nutritionSource: "https://www.cholula.com/en-au/products/hot-sauce/original", category: "Condiments", labelDependent: true, servingOptions: [{label:"1 teaspoon (5 ml)",amount:1,carbs:0.1},{label:"1 tablespoon",amount:3,carbs:0.3}] },
+    { name: "Tajín Fruity Chamoy Hot Sauce", serving: "1 teaspoon (5 ml)", carbs: 0, nutritionSource: "https://www.tajin.com/us/tajin-chamoy-stage/", category: "Condiments", labelDependent: true, servingOptions: [{label:"1 teaspoon (5 ml)",amount:1,carbs:0},{label:"1 tablespoon",amount:3,carbs:0}] },
+    { name: "Chamoy Sauce, sweetened", serving: "1 tablespoon", carbs: 5, category: "Condiments", labelDependent: true, servingOptions: [{label:"1 tablespoon",amount:1,carbs:5},{label:"1 teaspoon",amount:1/3,carbs:1.7},{label:"2 tablespoons",amount:2,carbs:10}] },
+    { name: "Garlic Salt", serving: "1/4 teaspoon (1.3 g)", carbs: 0, nutritionSource: "https://smartlabel-hv.scanbuy.com/075450047813-0001-en-US/index.html", category: "Seasonings", labelDependent: true, servingOptions: [{label:"1/4 teaspoon (1.3 g)",amount:1,carbs:0},{label:"1 teaspoon",amount:4,carbs:0.2},{label:"1 tablespoon",amount:12,carbs:0.6}] },
+    { name: "Onion Salt", serving: "1/4 teaspoon (1.2 g)", carbs: 0, nutritionSource: "https://www.kroger.com/p/kroger-onion-salt/0001111000322", category: "Seasonings", labelDependent: true, servingOptions: [{label:"1/4 teaspoon (1.2 g)",amount:1,carbs:0},{label:"1 teaspoon",amount:4,carbs:0.2},{label:"1 tablespoon",amount:12,carbs:0.6}] },
+    { name: "GOYA Sazón con Culantro y Achiote", serving: "1/4 teaspoon (1 g)", carbs: 0, nutritionSource: "https://shop.goya.com/es/products/sazon-con-culantro-y-achiote-goya", category: "Seasonings", labelDependent: true, servingOptions: [{label:"1/4 teaspoon (1 g)",amount:1,carbs:0},{label:"1 packet (about 5 g)",amount:5,carbs:0.5},{label:"2 packets (about 10 g)",amount:10,carbs:1}] },
+    { name: "Adobo Seasoning", serving: "1/4 teaspoon", carbs: 0, category: "Seasonings", labelDependent: true, servingOptions: [{label:"1/4 teaspoon",amount:1,carbs:0},{label:"1 teaspoon",amount:4,carbs:0.5},{label:"1 tablespoon",amount:12,carbs:1.5}] },
+    { name: "Knorr Chicken Bouillon Cube", serving: "1 cube (makes 2 cups broth)", carbs: 1, nutritionSource: "https://www.cookwithknorr.com/us/en/p/knorr-chicken-bouillon-cube.html/00062646070090", category: "Seasonings", labelDependent: true, servingOptions: [{label:"1 cube (makes 2 cups broth)",amount:1,carbs:1},{label:"1/2 cube",amount:0.5,carbs:0.5},{label:"2 cubes",amount:2,carbs:2}] },
+    { name: "Chicken Bouillon Powder", serving: "1 teaspoon (about 4 g)", carbs: 1, category: "Seasonings", labelDependent: true, servingOptions: [{label:"1 teaspoon (about 4 g)",amount:1,carbs:1},{label:"1/2 teaspoon",amount:0.5,carbs:0.5},{label:"1 tablespoon",amount:3,carbs:3}] },
+    // Baking staples, milk fat percentages, and canned vegetable portions.
+    { name: "All-Purpose Flour", serving: "1/4 cup (31 g)", carbs: 23.8, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=flour+wheat+all+purpose", category: "Baking", servingOptions: [{label:"1/4 cup (31 g)",amount:0.25,carbs:23.8},{label:"1/3 cup (41 g)",amount:1/3,carbs:31.5},{label:"1/2 cup (62.5 g)",amount:0.5,carbs:47.7},{label:"1 cup (125 g)",amount:1,carbs:95.4},{label:"1 tablespoon (8 g)",amount:8/125,carbs:6.1}] },
+    { name: "Self-Rising Flour", serving: "1/4 cup (31 g)", carbs: 23.8, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=self+rising+flour", category: "Baking", servingOptions: [{label:"1/4 cup (31 g)",amount:0.25,carbs:23.8},{label:"1/2 cup (62.5 g)",amount:0.5,carbs:47.7},{label:"1 cup (125 g)",amount:1,carbs:95.4}] },
+    { name: "Cornstarch", serving: "1 tablespoon (8 g)", carbs: 7.2, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=cornstarch", category: "Baking", servingOptions: [{label:"1 tablespoon (8 g)",amount:1,carbs:7.2},{label:"1 teaspoon",amount:1/3,carbs:2.4},{label:"1/4 cup (32 g)",amount:4,carbs:29},{label:"1 cup (128 g)",amount:16,carbs:116.9}] },
+    { name: "Baking Soda", serving: "1 teaspoon (4.6 g)", carbs: 0, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=baking+soda", category: "Baking", servingOptions: [{label:"1 teaspoon (4.6 g)",amount:1,carbs:0},{label:"1/2 teaspoon",amount:0.5,carbs:0},{label:"1/4 teaspoon",amount:0.25,carbs:0},{label:"1 tablespoon",amount:3,carbs:0}] },
+    { name: "Milk, 1%", serving: "1 cup (244 g)", carbs: 12, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=milk+lowfat+fluid+1%25+milkfat", category: "Dairy", servingOptions: [{label:"1 cup (244 g)",amount:1,carbs:12},{label:"1/2 cup",amount:0.5,carbs:6},{label:"1/4 cup",amount:0.25,carbs:3},{label:"1 tablespoon",amount:1/16,carbs:0.75}] },
+    { name: "Butter, salted", serving: "1 tablespoon (14 g)", carbs: 0, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=butter+stick+salted", category: "Dairy", servingOptions: [{label:"1 tablespoon (14 g)",amount:1,carbs:0},{label:"1 teaspoon",amount:1/3,carbs:0},{label:"1 pat (5 g)",amount:5/14,carbs:0},{label:"1 stick (8 tablespoons)",amount:8,carbs:0}] },
+    { name: "Dark Brown Sugar, packed", serving: "1 tablespoon (13 g)", carbs: 12.6, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=sugars+brown", category: "Baking", servingOptions: [{label:"1 tablespoon (13 g)",amount:1,carbs:12.6},{label:"1 teaspoon",amount:1/3,carbs:4.2},{label:"1/4 cup (52 g)",amount:4,carbs:50.4}] },
+    { name: "Canned Corn, drained", serving: "1/2 cup (about 82 g)", carbs: 18, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=corn+sweet+yellow+canned+drained", category: "Vegetables", servingOptions: [{label:"1/2 cup (about 82 g)",amount:1,carbs:18},{label:"1/4 cup",amount:0.5,carbs:9},{label:"1 cup",amount:2,carbs:36}] },
+    { name: "Canned Green Beans, drained", serving: "1/2 cup (about 63 g)", carbs: 4, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=beans+snap+canned+drained", category: "Vegetables", servingOptions: [{label:"1/2 cup (about 63 g)",amount:1,carbs:4},{label:"1/4 cup",amount:0.5,carbs:2},{label:"1 cup",amount:2,carbs:8}] },
+    { name: "Canned Peas, drained", serving: "1/2 cup (about 80 g)", carbs: 12, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=peas+green+canned+drained", category: "Vegetables", servingOptions: [{label:"1/2 cup (about 80 g)",amount:1,carbs:12},{label:"1/4 cup",amount:0.5,carbs:6},{label:"1 cup",amount:2,carbs:24}] },
+    { name: "Canned Carrots, drained", serving: "1/2 cup (about 78 g)", carbs: 7, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=carrots+canned+drained", category: "Vegetables", servingOptions: [{label:"1/2 cup (about 78 g)",amount:1,carbs:7},{label:"1/4 cup",amount:0.5,carbs:3.5},{label:"1 cup",amount:2,carbs:14}] },
+    { name: "Canned Mixed Vegetables, drained", serving: "1/2 cup (about 80 g)", carbs: 8, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=vegetables+mixed+canned+drained", category: "Vegetables", servingOptions: [{label:"1/2 cup (about 80 g)",amount:1,carbs:8},{label:"1/4 cup",amount:0.5,carbs:4},{label:"1 cup",amount:2,carbs:16}] },
+
+    { name: "Cinnamon, ground", serving: "1 teaspoon (2.6 g)", carbs: 2.1, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=spices+cinnamon+ground", category: "Spices", servingOptions: [{label:"1 teaspoon (2.6 g)",amount:1,carbs:2.1},{label:"1/2 teaspoon",amount:0.5,carbs:1.1},{label:"1 tablespoon (7.8 g)",amount:3,carbs:6.4}] },
+    { name: "Pepperoni", serving: "1 oz (28 g)", carbs: 0.3, fdcSource: "https://fdc.nal.usda.gov/food-search/?query=pepperoni", category: "Protein", labelDependent: true, servingOptions: [{label:"1 oz (28 g)",amount:1,carbs:0.3},{label:"1/2 oz (14 g)",amount:0.5,carbs:0.2},{label:"1 slice (about 7 g)",amount:0.25,carbs:0.1}] },
 ];
 
 
@@ -2025,8 +2170,9 @@ savedCustomFoods.forEach(customFood => {
 let meal =
     JSON.parse(
         localStorage.getItem("carbCruncherMeal")
-    ) || [];
-let mealServingCount = Math.max(0.25, Number(localStorage.getItem("carbCruncherMealServingCount")) || 1);
+    ) || [];let mealServingCount = Number(localStorage.getItem("carbCruncherMealServingCount")) || 1;
+if (!Number.isInteger(mealServingCount) || mealServingCount < 1 || mealServingCount > 100) mealServingCount = 1;
+localStorage.setItem("carbCruncherMealServingCount", String(mealServingCount));
 let currentMealRecipeDraft = { name: "", servings: mealServingCount, portion: "plate", category: "Dinner" };
 let currentMealRecipeFeedback = "";
 
@@ -2043,6 +2189,7 @@ let mealIdeaTargetFilter = "all";
 let openIdeaDetailsIndex = -1;
 let openMealIdeaIndex = -1;
 let mealIdeaEdits = JSON.parse(localStorage.getItem("carbCruncherIdeaEdits")) || {};
+let mealIdeaCustomizations = JSON.parse(localStorage.getItem("carbCruncherIdeaCustomizations")) || {};
 let ideaPantry = JSON.parse(localStorage.getItem("carbCruncherIdeaPantry")) || [];
 let savedRecipes = JSON.parse(localStorage.getItem("carbCruncherRecipes")) || [];
 const recipeCategories = ["Breakfast", "Lunch", "Dinner","Sides", "Dessert", "Snack"];
@@ -2165,6 +2312,7 @@ function escapeQuotes(value) {
 
 function showScreen(title, content) {
 
+    app.classList.remove("home-layout");
     app.classList.add("screen-open");
     app.classList.toggle("settings-wide", title === "Settings");
     app.classList.toggle("content-wide", ["Quick Look Up", "Build a Plate", "What Can I Make?", "Learning", "My Carb Cruncher"].includes(title));
@@ -2253,6 +2401,7 @@ function showScreen(title, content) {
 function goHome() {
 
     app.classList.remove("settings-wide", "content-wide", "screen-open");
+    app.classList.add("home-layout");
 
     const screen =
         document.querySelector(".functional-screen");
@@ -3331,9 +3480,100 @@ function getFoodServings(food) {
         if (/\b(?:oz|ounce|lb|pound|gram)\b/.test(text)) return 2;
         return 1;
     };
-    return servings.map((serving,index)=>({serving,index})).sort((a,b)=>score(a.serving.label)-score(b.serving.label)||a.index-b.index).map(item=>item.serving);
+    return servings.map((serving,index)=>({serving,index})).sort((a,b)=>score(a.serving.label)-score(b.serving.label)||a.index-b.index).map(item=>item.serving);}
 
+function getUniqueMealServings(food) {
+    const servings = getFoodServings(food);
+    const choices = [];
+    const seen = new Set();
+
+    function addChoice(label, carbs, originalLabel, estimate = false) {
+        if (!Number.isFinite(carbs)) return;
+
+        const key = label.toLowerCase();
+        if (seen.has(key)) return;
+
+        seen.add(key);
+
+        choices.push({
+            label,
+            carbs,
+            originalLabel,
+            estimate
+        });
+    }
+
+    const hasEggPortion = servings.some(serving =>
+        /\beggs?\b/i.test(serving.label)
+    );
+
+    // Keep natural portions, such as egg, slice, or bun.
+    for (const serving of servings) {
+        const label = String(serving.label || "");
+
+        if (/\b(egg|slice|bun|piece|patty|clove|stalk|sprig|scoop|can|package|packet|head|breast|handful|bowl|whole)\b/i.test(label)) {
+            addChoice(
+                label.replace(/^\s*\d+(?:[./]\d+)?\s*/, "").trim() || label,
+                Number(serving.carbs),
+                serving.label
+            );
+        }
+    }
+
+    // Use a tablespoon serving to calculate standard volume units.
+    const tbsp = servings.find(serving =>
+        /\b(tablespoon|tbsp)\b/i.test(serving.label) &&
+        !/\b(teaspoon|tsp)\b/i.test(serving.label)
+    );
+
+    if (tbsp) {
+        const carbsPerTbsp = Number(tbsp.carbs) /
+            (Number(tbsp.amount) || 1);
+
+        addChoice("tbsp", carbsPerTbsp, tbsp.label);
+
+        addChoice("cup", carbsPerTbsp * 16, "1 cup");
+    }
+
+    const tsp = servings.find(serving =>
+        /\b(teaspoon|tsp)\b/i.test(serving.label)
+    );
+
+    if (tsp) {
+        const carbsPerTsp = Number(tsp.carbs) /
+            (Number(tsp.amount) || 1);
+
+       addChoice("tsp", carbsPerTsp, "1 teaspoon");
+    } else if (tbsp) {
+        addChoice(
+            "tsp",
+            Number(tbsp.carbs) / ((Number(tbsp.amount) || 1) * 3),
+            tbsp.label
+        );
+    }
+
+    // Ounce-based values are estimates when supplied as carbsPerOunce.
+    if (Number.isFinite(Number(food.carbsPerOunce))) {
+        addChoice(
+            hasEggPortion ? "oz (estimate)" : "oz (estimate)",
+            Number(food.carbsPerOunce),
+            "1 oz by weight (estimate)",
+            true
+        );
+    } else {
+        const ounce = servings.find(serving =>
+            /\b(?:oz|ounce)\b/i.test(serving.label) &&
+            /weight/i.test(serving.label)
+        );
+
+        if (ounce) {
+            addChoice("oz", Number(ounce.carbs), ounce.label);
+        }
+    }
+
+    return choices;
 }
+
 
 
 /* =========================================================
@@ -3955,17 +4195,13 @@ function addLookupFoodToMeal(
        This fixes the different serving options
        such as half cup vs whole cup.
     */
-
-    addFoodToMeal(
-        food.name,
-        serving.label || food.serving || "1 serving",
-        Number(serving.carbs) || 0,
-        quantity
-    );
-
+addFoodToMeal(
+    food.name,
+    serving.label || food.serving || "1 serving",
+    null,
+    quantity
+);
 }
-
-
 /* =========================================================
    RENDER PLATE
 ========================================================= */
@@ -4873,7 +5109,7 @@ function renderCookAsYouGoIngredients() {
     const totalContainer =
         document.getElementById("cookAsYouGoTotal");
 
-    if (!container || !totalContainer) return;
+    if (!container || !totalContainer) ;
 
     if (!cookAsYouGoIngredients.length) {
 
@@ -4935,7 +5171,7 @@ if (food) {
     border-radius:18px;
     padding:44px 14px 14px;
     margin-top:12px;
-    text-align:right;
+    text-align:left;
 ">
 
                     <div style="
@@ -5060,14 +5296,9 @@ if (food) {
 
     </div>
 
-    <span style="
-        font-weight:800;
-        color:#3F6F2A;
-        white-space:nowrap;
-        padding-top:18px;
-    ">
-        ${carbs.toFixed(1)} g
-    </span>
+
+<span style="font-weight:800; color:#3F6F2A; white-space:nowrap; padding-top:18px;">${carbs.toFixed(1)} g</span>
+
 
 </div>
 
@@ -5536,20 +5767,21 @@ function addFoodToMeal(name, servingLabel = null, carbsPerServing = null, quanti
     if (!food) return;
 
 
-    const servings =
-        getFoodServings(food);
+    const servings = getUniqueMealServings(food);
 
     const serving =
-        servings.find(item => item.label === servingLabel) || servings[0];
+    servings.find(item => item.originalLabel === servingLabel) ||
+    servings.find(item => item.label === servingLabel) ||
+    servings[0];
 
 
     meal.push({
 
         name: food.name,
 
-        servingLabel: serving.label,
+        servingLabel: serving.originalLabel,
 
-        carbsPerServing: carbsPerServing === null ? serving.carbs : carbsPerServing,
+     carbsPerServing: carbsPerServing === null ? Number(serving.carbs) : Number(carbsPerServing),
 
         isDrink: food.category === "Drinks",
 
@@ -5656,22 +5888,22 @@ function renderMeal() {
                         );
 
 
-                    const servings =
-                        food
-                            ? getFoodServings(food)
-                            : [];
+                 const servings =
+    food
+        ? getUniqueMealServings(food)
+        : [];
 
                     let selectedIndex = 0;
 
 
                     if (food) {
 
-                        const foundIndex =
-                            servings.findIndex(
-                                serving =>
-                                    serving.label ===
-                                    item.servingLabel
-                            );
+                    const foundIndex =
+    servings.findIndex(
+        serving =>
+            serving.originalLabel ===
+            item.servingLabel
+    );
 
 
                         if (foundIndex >= 0) {
@@ -5769,136 +6001,140 @@ function renderMeal() {
                             </div>
 
 
-                            ${
-                                food
-                                ?
-
-                                `
-
-                                    <select
-                                        onchange="
-                                            changeMealServing(
-                                                ${index},
-                                                this.value
-                                            )
-                                        "
-                                        style="
-                                            width: 100%;
-                                            padding: 11px;
-                                            margin-top: 12px;
-                                            border: 2px solid #B8C9A5;
-                                            border-radius: 16px;
-                                            background: white;
-                                            color: #294A1D;
-                                            font-family:
-                                                Nunito,
-                                                sans-serif;
-                                            font-weight: 800;
-                                            font-size: 14px;
-                                        "
-                                    >
-
-                                        ${
-                                            servings.map(
-                                                (
-                                                    serving,
-                                                    i
-                                                ) => `
-
-                                                    <option
-                                                        value="${i}"
-                                                        ${
-                                                            i ===
-                                                            selectedIndex
-                                                            ? "selected"
-                                                            : ""
-                                                        }
-                                                    >
-                                                        ${escapeHTML(
-                                                            serving.label
-                                                        )}
-                                                    </option>
-
-                                                `
-                                            ).join("")
-                                        }
-
-                                    </select>
-
-                                    ${String(servings[selectedIndex]?.label || "").includes("(estimate)") ? `
-                                        <div style="color:#687064;font-size:12px;margin-top:7px;">
-                                            Approximate carbs for this weight.
-                                        </div>
-                                    ` : ""}
-
-                                `
-
-                                :
-
-                                ""
-
-                            }
-
-
-                    <div style="
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-top: 12px;
-">
-
-    <div style="
-        flex: 1;
-    ">
-
+                       ${
+    food
+    ?
+    `
         <div style="
-            font-size: 12px;
-            color: #687064;
-            font-weight: 800;
-            margin-bottom: 5px;
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 58px 76px;
+            gap: 7px;
+            align-items: center;
+            margin-top: 12px;
         ">
-            Quantity
+            <select
+                aria-label="Serving size"
+                onchange="changeMealServing(${index}, this.value)"
+                style="
+                    width: 100%;
+                    min-width: 0;
+                    box-sizing: border-box;
+                    padding: 9px 6px;
+                    border: 2px solid #B8C9A5;
+                    border-radius: 12px;
+                    background: white;
+                    color: #294A1D;
+                    font-family: Nunito, sans-serif;
+                    font-weight: 800;
+                    font-size: 13px;
+                "
+            >
+                ${
+                    servings.map(
+                        (serving, i) => `
+                            <option
+                                value="${i}"
+                                ${i === selectedIndex ? "selected" : ""}
+                            >${escapeHTML(serving.label)}</option>
+                        `
+                    ).join("")
+                }
+            </select>
+
+            <input
+                id="mealQuantityWhole-${index}"
+                type="number"
+                min="0"
+                max="100"
+                step="1"
+                value="${Math.floor(quantity)}"
+                aria-label="Whole quantity"
+                onchange="this.dataset.userEdited='true'; setMealQuantityParts(${index})"
+                style="
+                    width: 100%;
+                    min-width: 0;
+                    box-sizing: border-box;
+                    padding: 9px 2px;
+                    border: 2px solid #B8C9A5;
+                    border-radius: 12px;
+                    background: white;
+                    color: #294A1D;
+                    font-family: Nunito, sans-serif;
+                    font-weight: 800;
+                    font-size: 14px;
+                    text-align: center;
+                "
+            >
+
+            <select
+                id="mealQuantityFraction-${index}"
+                aria-label="Quantity fraction"
+                onchange="setMealQuantityParts(${index})"
+                style="
+                    width: 100%;
+                    min-width: 0;
+                    box-sizing: border-box;
+                    padding: 9px 4px;
+                    border: 2px solid #B8C9A5;
+                    border-radius: 12px;
+                    background: white;
+                    color: #294A1D;
+                    font-family: Nunito, sans-serif;
+                    font-weight: 800;
+                    font-size: 14px;
+                "
+            >
+                <option value="0" ${Math.abs(quantity - Math.round(quantity)) < 0.001 ? "selected" : ""}>None</option>
+                <option value="0.25" ${Math.abs(quantity % 1 - 0.25) < 0.001 ? "selected" : ""}>¼</option>
+                <option value="0.3333333333" ${Math.abs(quantity % 1 - 1 / 3) < 0.001 ? "selected" : ""}>⅓</option>
+                <option value="0.5" ${Math.abs(quantity % 1 - 0.5) < 0.001 ? "selected" : ""}>½</option>
+                <option value="0.6666666667" ${Math.abs(quantity % 1 - 2 / 3) < 0.001 ? "selected" : ""}>⅔</option>
+                <option value="0.75" ${Math.abs(quantity % 1 - 0.75) < 0.001 ? "selected" : ""}>¾</option>
+            </select>
         </div>
 
-        <select
-            onchange="
-                setMealQuantity(
-                    ${index},
-                    this.value
-                )
-            "
-            style="
-                width: 100%;
-                padding: 11px;
-                border: 2px solid #B8C9A5;
-                border-radius: 16px;
-                background: white;
-                color: #294A1D;
-                font-family: Nunito, sans-serif;
-                font-weight: 800;
-                font-size: 14px;
-            "
-        >
-            ${createQuantityOptions(quantity)}
-        </select>
+        ${String(servings[selectedIndex]?.label || "").includes("(estimate)") ? `
+            <div style="color:#687064;font-size:12px;margin-top:7px;">
+                Approximate carbs for this weight.
+            </div>
+        ` : ""}
+    `
+    :
+    `
+        <div style="
+            display: grid;
+            grid-template-columns: 58px 76px;
+            gap: 7px;
+            margin-top: 12px;
+        ">
+            <input
+                id="mealQuantityWhole-${index}"
+                type="number"
+                min="0"
+                max="100"
+                step="1"
+                value="${Math.floor(quantity)}"
+                aria-label="Whole quantity"
+                onchange="this.dataset.userEdited='true'; setMealQuantityParts(${index})"
+                style="width:100%;min-width:0;box-sizing:border-box;padding:9px 2px;border:2px solid #B8C9A5;border-radius:12px;background:white;color:#294A1D;font-family:Nunito,sans-serif;font-weight:800;font-size:14px;text-align:center;"
+            >
 
-    </div>
-
-
-    <span style="
-        font-weight: 800;
-        color: #3F6F2A;
-        white-space: nowrap;
-        padding-top: 18px;
-    ">
-        ${formatCarbs(
-            carbs * quantity
-        )}g
-    </span>
-
-</div>
-
-                        </div>
+            <select
+                id="mealQuantityFraction-${index}"
+                aria-label="Quantity fraction"
+                onchange="setMealQuantityParts(${index})"
+                style="width:100%;min-width:0;box-sizing:border-box;padding:9px 4px;border:2px solid #B8C9A5;border-radius:12px;background:white;color:#294A1D;font-family:Nunito,sans-serif;font-weight:800;font-size:14px;"
+            >
+                <option value="0" ${Math.abs(quantity - Math.round(quantity)) < 0.001 ? "selected" : ""}>None</option>
+                <option value="0.25" ${Math.abs(quantity % 1 - 0.25) < 0.001 ? "selected" : ""}>¼</option>
+                <option value="0.3333333333" ${Math.abs(quantity % 1 - 1 / 3) < 0.001 ? "selected" : ""}>⅓</option>
+                <option value="0.5" ${Math.abs(quantity % 1 - 0.5) < 0.001 ? "selected" : ""}>½</option>
+                <option value="0.6666666667" ${Math.abs(quantity % 1 - 2 / 3) < 0.001 ? "selected" : ""}>⅔</option>
+                <option value="0.75" ${Math.abs(quantity % 1 - 0.75) < 0.001 ? "selected" : ""}>¾</option>
+            </select>
+        </div>
+    `
+}
 
                     `;
 
@@ -5935,7 +6171,7 @@ function renderMeal() {
             </div>
 
         </div>
-        ${hasFoods ? `<div id="mealAverageCard" class="carb-total-panel" style="background:#24364B;color:#FFFFFF;border-radius:26px;padding:20px;margin-top:12px;text-align:center;"><div style="font-family:Caveat,cursive;font-size:34px;">Average Carbs Per Plate</div><div id="mealCarbsPerServing" aria-live="polite" style="font-size:38px;font-weight:800;line-height:1.2;">${formatCarbs(plateCarbs / mealServingCount)}g</div><p style="color:#F2F4EC;font-size:14px;line-height:1.5;margin:8px 0 14px;">Average carbs from foods on each plate. Drinks are included in Total Carbs above, but not in this plate estimate.</p><div style="display:flex;justify-content:center;align-items:center;gap:10px;flex-wrap:wrap;"><label for="mealServingCount" style="font-weight:800;">Divide food by people / plates:</label><input id="mealServingCount" type="number" min="0.25" max="100" step="0.25" value="${mealServingCount}" oninput="updateMealServingCount(this.value)" style="width:105px;padding:10px;border:2px solid #D9E1D1;border-radius:9px;background:#FFFDF7;color:#294A1D;font:inherit;font-weight:800;"></div></div>` : ""}`;
+        ${hasFoods ? `<div id="mealAverageCard" class="carb-total-panel" style="background:#24364B;color:#FFFFFF;border-radius:26px;padding:20px;margin-top:12px;text-align:center;"><div style="font-family:Caveat,cursive;font-size:34px;">Average Carbs Per Plate</div><div id="mealCarbsPerServing" aria-live="polite" style="font-size:38px;font-weight:800;line-height:1.2;">${formatCarbs(plateCarbs / mealServingCount)}g</div><p style="color:#F2F4EC;font-size:14px;line-height:1.5;margin:8px 0 14px;">Average carbs from foods on each plate. Drinks are included in Total Carbs above, but not in this plate estimate.</p><div style="display:flex;justify-content:center;align-items:center;gap:10px;flex-wrap:wrap;"><label for="mealServingCount" style="font-weight:800;">Divide food by people / plates:</label><input id="mealServingCount" type="number" min="1" max="100" step="1" value="${mealServingCount}" oninput="updateMealServingCount(this.value)" style="width:105px;padding:10px;border:2px solid #D9E1D1;border-radius:9px;background:#FFFDF7;color:#294A1D;font:inherit;font-weight:800;"></div></div>` : ""}`;
 
     const averageCard = document.getElementById("mealAverageCard");
     if (averageCard && hasFoods) {
@@ -5952,7 +6188,7 @@ function updateMealServingCount(value) {
 
     const count = Number(value);
 
-    if (!Number.isFinite(count) || count < 0.25 || count > 100) return;
+   if (!Number.isInteger(count) || count < 1 || count > 100) return;
 
     mealServingCount = count;
 
@@ -6071,6 +6307,30 @@ function clearFoodDiary() {
    CHANGE MEAL SERVING
 ========================================================= */
 
+
+
+function getServingDisplayLabel(label) {
+    const text = String(label || "").trim();
+
+    // Keep natural portions unchanged.
+    if (/\b(egg|slice|bun|piece|patty|clove|stalk|sprig|scoop|can|package|packet|head|breast|handful|bowl|whole)\b/i.test(text)) {
+        return text;
+    }
+
+    // Show measurement units without amounts.
+    if (/\b(teaspoons?|tsp)\b/i.test(text)) return "tsp";
+    if (/\b(tablespoons?|tbsp)\b/i.test(text)) return "tbsp";
+    if (/\bcups?\b/i.test(text)) return "cup";
+    if (/\b(ounces?|oz)\b/i.test(text)) {
+        return /weight/i.test(text) ? "oz (estimate)" : "oz";
+    }
+
+    // Leave unfamiliar serving labels unchanged.
+    return text;
+}
+
+
+
 function changeMealServing(
     mealIndex,
     servingIndex
@@ -6094,22 +6354,21 @@ function changeMealServing(
 
 
     const servings =
-        getFoodServings(food);
+    getUniqueMealServings(food);
 
-    const serving =
-        servings[Number(servingIndex)];
+const serving =
+    servings[Number(servingIndex)];
 
 
     if (!serving) return;
 
 
-    item.servingLabel =
-        serving.label;
+   item.servingLabel =
+    serving.originalLabel;
 
 
-    item.carbsPerServing =
-        serving.carbs;
-
+item.carbsPerServing =
+    serving.carbs;
 
     saveData();
 
@@ -6163,6 +6422,54 @@ function setMealQuantity(index, value) {
     renderMeal();
 
 }
+
+function setMealQuantityParts(index) {
+
+    if (!meal[index]) return;
+
+    const wholeInput = document.getElementById(
+        `mealQuantityWhole-${index}`
+    );
+
+    const fractionInput = document.getElementById(
+        `mealQuantityFraction-${index}`
+    );
+
+    if (!wholeInput || !fractionInput) return;
+
+  let whole = Number(wholeInput.value);
+const fraction = Number(fractionInput.value);
+
+// If the user chooses a fraction while the whole quantity
+// is still the untouched default of 1, use the fraction alone.
+if (
+    fraction > 0 &&
+    whole === 1 &&
+    !wholeInput.dataset.userEdited
+) {
+    whole = 0;
+    wholeInput.value = "0";
+}
+
+    if (
+        !Number.isInteger(whole) ||
+        whole < 0 ||
+        whole > 100 ||
+        whole + fraction <= 0 ||
+        whole + fraction > 100
+    ) {
+        renderMeal();
+        return;
+    }
+
+    meal[index].quantity = whole + fraction;
+
+    saveData();
+
+    renderMeal();
+
+}
+
 function changeQuantity(
     index,
     amount
@@ -6283,6 +6590,59 @@ savedRecipes = savedRecipes.map(recipe => {
 if (savedRecipes.length) localStorage.setItem("carbCruncherRecipes",JSON.stringify(savedRecipes));
 function recipeCategoryOptions(selected) {
     return recipeCategories.map(category=>`<option value="${category}" ${category===selected?'selected':''}>${category}</option>`).join("");
+}
+
+function mealIdeaCustomizationKey(idea, index) {
+    return String(idea.id || `idea:${idea.name}:${index}`);
+}
+function saveMealIdeaCustomization(index, field, value) {
+    const idea = mealIdeas[index];
+    if (!idea) return;
+    const key = mealIdeaCustomizationKey(idea, index);
+    mealIdeaCustomizations[key] = {...(mealIdeaCustomizations[key] || {}), [field]: value};
+    localStorage.setItem("carbCruncherIdeaCustomizations", JSON.stringify(mealIdeaCustomizations));
+    renderMealIdeaCards();
+}
+function saveMealIdeaPhoto(index, file) {
+    if (!file) return;
+    const idea = mealIdeas[index];
+    if (!idea) return;
+    const reader = new FileReader();
+    reader.onerror = () => alert("Could not read that picture. Please choose it again.");
+    reader.onload = () => {
+        const image = new Image();
+        image.onerror = () => alert("That file could not be opened as a picture.");
+        image.onload = () => {
+            const maxSide = 720;
+            const scale = Math.min(1, maxSide / Math.max(image.width, image.height));
+            const canvas = document.createElement("canvas");
+            canvas.width = Math.max(1, Math.round(image.width * scale));
+            canvas.height = Math.max(1, Math.round(image.height * scale));
+            const context = canvas.getContext("2d");
+            context.fillStyle = "#FFFDF7";
+            context.fillRect(0, 0, canvas.width, canvas.height);
+            context.drawImage(image, 0, 0, canvas.width, canvas.height);
+            const key = mealIdeaCustomizationKey(idea, index);
+            const previous = mealIdeaCustomizations[key] || {};
+            mealIdeaCustomizations[key] = {...previous, photoData: canvas.toDataURL("image/jpeg", 0.78)};
+            try {
+                localStorage.setItem("carbCruncherIdeaCustomizations", JSON.stringify(mealIdeaCustomizations));
+                renderMealIdeaCards();
+            } catch (error) {
+                mealIdeaCustomizations[key] = previous;
+                alert("This picture could not be saved because browser storage is full. Try a smaller picture.");
+            }
+        };
+        image.src = String(reader.result || "");
+    };
+    reader.readAsDataURL(file);
+}
+function resetMealIdeaCustomization(index) {
+    const idea = mealIdeas[index];
+    if (!idea) return;
+    delete mealIdeaCustomizations[mealIdeaCustomizationKey(idea, index)];
+    localStorage.setItem("carbCruncherIdeaCustomizations", JSON.stringify(mealIdeaCustomizations));
+    renderMealIdeaCards();
 }
 
 function getMealIdeaIngredients(index) {
@@ -6976,12 +7336,12 @@ function autoSaveCustomizedIdea(index) {
 }
 
 function openMealIdeas() {
-    const categories = ["All", "Breakfast", "Lunch", "Dinner", "Dessert", "Snack"];
+    const categories = ["All", "Breakfast", "Lunch", "Dinner", "Sides", "Dessert", "Snack"];
     showScreen("What Can I Make?", `
         <p style="color:#687064;margin:0 0 16px;font-weight:700;">Add foods you have on hand to find flexible meal ideas, then adjust any idea to fit your kitchen.</p>
         <div style="background:#FFFDF7;border:2px solid #D9E1D1;border-radius:20px;padding:16px;margin-bottom:18px;">
             <label for="ideaPantrySearch" style="display:block;color:#294A1D;font-weight:800;margin-bottom:8px;">What do you have on hand?</label>
-            <div style="display:flex;gap:8px;"><input id="ideaPantrySearch" type="search" placeholder="Search foods you have" style="flex:1;min-width:0;padding:12px;border:1px solid #C8D3C0;border-radius:12px;font:inherit;"><button id="ideaPantryAdd" style="padding:10px 14px;border:0;border-radius:12px;background:#3F6F2A;color:white;font-weight:800;">Add</button></div>
+            <div style="display:flex;gap:8px;width:100%;max-width:430px;margin:0 auto;"><input id="ideaPantrySearch" type="search" placeholder="Search foods you have" style="flex:1;min-width:0;padding:12px;border:1px solid #C8D3C0;border-radius:12px;font:inherit;font-size:16px;"><button id="ideaPantryAdd" style="padding:10px 14px;border:0;border-radius:12px;background:#3F6F2A;color:white;font-weight:800;">Add</button></div>
             <div style="display:flex;align-items:center;justify-content:flex-start;gap:4px;margin-top:10px;"><span style="color:#596454;font-size:13px;font-weight:700;">Only show ideas within my carb target</span><button id="ideaTargetToggle" type="button" aria-pressed="${mealIdeaTargetFilter==="within"}" onclick="toggleMealIdeaTarget()" style="display:inline-flex;align-items:center;justify-content:center;min-width:25px;height:17px;padding:0 3px;border:0;border-radius:9px;background:#3F6F2A;color:#FFFFFF;font-size:10px;font-weight:800;line-height:1;text-align:center;">${mealIdeaTargetFilter==="within"?"On":"Off"}</button></div>
             <div id="ideaPantrySuggestion" style="margin-top:8px;"></div><div id="ideaPantryChips" style="display:flex;flex-wrap:wrap;gap:7px;margin-top:8px;"></div>
         </div>
@@ -7029,14 +7389,28 @@ function renderPantryChips() {
 function renderMealIdeaCards() {
     const box = document.getElementById("mealIdeaCards"); if (!box) return;
     box.classList.add("idea-grid");
-    const available = mealIdeas.map((idea,index) => ({...idea,index,total:mealIdeaNutrition(idea,index),target:getMealIdeaTarget(idea),ingredients:getMealIdeaIngredients(index),matches:getMealIdeaIngredients(index).filter(item=>ideaPantry.includes(item.food)).length})).filter(idea => {
+    const available = mealIdeas.map((baseIdea,index) => {
+        const custom = mealIdeaCustomizations[mealIdeaCustomizationKey(baseIdea, index)] || {};
+        const idea = {...baseIdea, name:custom.name || baseIdea.name, category:custom.category || baseIdea.category, image:custom.photoData || custom.image || baseIdea.image, photo:custom.photoData ? "Your photo" : baseIdea.photo};
+        return {...idea,index,total:mealIdeaNutrition(idea,index),target:getMealIdeaTarget(idea),ingredients:getMealIdeaIngredients(index),matches:getMealIdeaIngredients(index).filter(item=>ideaPantry.includes(item.food)).length};
+    }).filter(idea => {
         const within = idea.total <= idea.target;
-        return !ideaHasExcludedFood(idea) && (mealIdeaTargetFilter !== "within" || within) && (mealIdeaCategory === "All" || idea.category === mealIdeaCategory) && (mealIdeaCategory === "All" || !ideaPantry.length || idea.matches > 0 || idea.index === openMealIdeaIndex);
+        // Category browsing shows every recipe in that category; on-hand matches affect ranking, not visibility.
+        return !ideaHasExcludedFood(idea) && (mealIdeaTargetFilter !== "within" || within) && (mealIdeaCategory === "All" || idea.category === mealIdeaCategory);
     }).sort((a,b)=>Number(b.total<=b.target)-Number(a.total<=a.target) || b.matches-a.matches || a.total-b.total);
     const ideaCards = available.map(idea => {
        const editorOpen = adjustingMealIdeaIndex === idea.index;
         const editor = editorOpen ? `<div onclick="event.stopPropagation()" onkeydown="event.stopPropagation()" style="margin-top:14px;border-top:1px solid #D9E1D1;padding-top:14px;">
-            <h4 style="margin:0 0 4px;color:#294A1D;">Adjust this idea</h4><p style="margin:0 0 10px;color:#687064;font-size:12px;">Enter a custom weight in ounces when you know the package size, such as 10 oz.</p>
+            <h4 style="margin:0 0 4px;color:#294A1D;">Edit recipe details</h4>
+            <label style="display:block;margin:10px 0 5px;color:#294A1D;font-weight:800;font-size:13px;">Recipe name</label>
+            <input value="${escapeHTML(idea.name)}" onchange="saveMealIdeaCustomization(${idea.index},'name',this.value.trim())" style="box-sizing:border-box;width:100%;padding:10px;border:1px solid #C8D3C0;border-radius:10px;font:inherit;">
+            <label style="display:block;margin:10px 0 5px;color:#294A1D;font-weight:800;font-size:13px;">Category</label>
+            <select onchange="saveMealIdeaCustomization(${idea.index},'category',this.value)" style="width:100%;padding:10px;border:1px solid #C8D3C0;border-radius:10px;background:white;font:inherit;">${recipeCategoryOptions(idea.category || "Dinner")}</select>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:10px 0 16px;">
+                <label style="position:relative;display:inline-flex;align-items:center;border:1px solid #C8D3C0;background:#FFFDF7;color:#294A1D;border-radius:9px;padding:8px 11px;font-size:12px;font-weight:800;cursor:pointer;">📷 ${mealIdeaCustomizations[mealIdeaCustomizationKey(mealIdeas[idea.index],idea.index)]?.photoData ? "Change photo" : "Choose photo"}<input type="file" accept="image/*" aria-label="Choose a recipe photo" onchange="saveMealIdeaPhoto(${idea.index},this.files?.[0])" style="position:absolute;width:1px;height:1px;opacity:0;"></label>
+                <button type="button" onclick="resetMealIdeaCustomization(${idea.index})" style="border:1px solid #C8D3C0;background:white;color:#596454;border-radius:9px;padding:8px 11px;font-size:12px;font-weight:800;cursor:pointer;">Reset name, category & photo</button>
+            </div>
+            <h4 style="margin:0 0 4px;color:#294A1D;">Adjust ingredients</h4><p style="margin:0 0 10px;color:#687064;font-size:12px;">Edit what goes in this recipe and adjust amounts below.</p>
             ${idea.ingredients.length ? idea.ingredients.map((item,ingredientIndex)=>{
                 const food=foods.find(entry=>entry.name===item.food);
                 const servings=food?getFoodServings(food):[];
@@ -7127,7 +7501,7 @@ function renderMealIdeaCards() {
        const ideaExpanded = openMealIdeaIndex === idea.index;
         const detailsOpen = openIdeaDetailsIndex === idea.index;
         return {html:`<article class="idea-card" onclick="toggleMealIdea(${idea.index})" role="button" tabindex="0" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();toggleMealIdea(${idea.index})}" aria-expanded="${editorOpen}">
-            <div class="idea-photo"><img src="${idea.image}" alt="${escapeHTML(idea.name)}" loading="lazy" onerror="this.style.display='none'"><button class="idea-details-toggle" type="button" aria-label="Show ingredients and photo credit" onclick="event.stopPropagation();toggleIdeaDetails(${idea.index})">i</button><div class="idea-hover-details ${detailsOpen?'show':''}" onclick="event.stopPropagation()"><p><strong>Ingredients and amounts</strong></p><p>${escapeHTML(detailIngredients)}</p><p><strong>Serving:</strong> about 1 plate or bowl. Amounts are estimates.</p><p><strong>Photo:</strong> <a href="${idea.source}" target="_blank" rel="noopener">${escapeHTML(idea.photo)}</a></p></div></div>
+            <div class="idea-photo"><img src="${idea.image}" alt="${escapeHTML(idea.name)}" loading="lazy" onerror="this.style.display='none'"><button class="idea-details-toggle" type="button" aria-label="Show ingredients and photo credit" onclick="event.stopPropagation();toggleIdeaDetails(${idea.index})">i</button><div class="idea-hover-details ${detailsOpen?'show':''}" onclick="event.stopPropagation()"><p><strong>Ingredients and amounts</strong></p><p>${escapeHTML(detailIngredients)}</p><p><strong>Serving:</strong> about 1 plate or bowl. Amounts are estimates.</p><p><strong>Photo:</strong> ${mealIdeaCustomizations[mealIdeaCustomizationKey(mealIdeas[idea.index],idea.index)]?.photoData ? "Your photo" : `<a href="${idea.source}" target="_blank" rel="noopener noreferrer">${escapeHTML(idea.photo || "Photo source")}</a>`}</p>${idea.inspirationUrl?`<p><strong>Pinterest inspiration:</strong> <a href="${idea.inspirationUrl}" target="_blank" rel="noopener noreferrer">View pin</a></p>`:""}</div></div>
            <div class="idea-card-summary"><h3>${escapeHTML(idea.name)}</h3><strong>About ${formatCarbs(idea.total)}g carbs per serving</strong>${ideaPantry.length?`<div style="color:#687064;font-size:11px;margin-top:4px;">Uses ${idea.matches} foods you have</div>`:""}</div>
 
 ${ideaExpanded ? `
@@ -7146,7 +7520,7 @@ ${ideaExpanded ? `
 
         <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;">
             <button type="button" onclick="toggleMealIdeaAdjust(${idea.index})" style="border:0;background:#3F6F2A;color:white;border-radius:9px;padding:8px 11px;font-size:12px;font-weight:800;cursor:pointer;">
-                ${editorOpen ? "Close adjustment" : "Adjust recipe"}
+                ${editorOpen ? "Close editor" : "Edit recipe"}
             </button>
 
             <button type="button" onclick="event.stopPropagation();saveMealIdeaRecipe(${idea.index})" style="border:0;background:#E4EBDD;color:#294A1D;border-radius:9px;padding:8px 11px;font-size:12px;font-weight:800;cursor:pointer;">
@@ -7159,18 +7533,18 @@ ${ideaExpanded ? `
 ${editor}
         </article>`,withinTarget:idea.total<=idea.target,matches:idea.matches,total:idea.total};
     });
-    const savedCards = renderSavedRecipeIdeaCards();
+    const savedCards = renderSavedRecipeIdeaCards(mealIdeaCategory);
     const mixedCards = [...ideaCards,...savedCards].sort((a,b)=>Number(b.withinTarget)-Number(a.withinTarget)||b.matches-a.matches||a.total-b.total).map(card=>card.html);
     box.innerHTML = mixedCards.length ? mixedCards.join("") : `<div style="grid-column:1/-1;background:#FFFDF7;border:2px solid #D9E1D1;border-radius:20px;padding:22px;color:#596454;text-align:center;">No meal ideas match what you have on hand and the current filters. Try removing an ingredient or turn off the carb target.</div>`;
 }
 
-function renderSavedRecipeIdeaCards() {
+function renderSavedRecipeIdeaCards(categoryFilter = "All") {
     if (!savedRecipes.length) return [];
 
     return savedRecipes
         .filter(recipe => {
             const category = recipe.category || (Number.isInteger(recipe.autoIdeaIndex) ? mealIdeas[recipe.autoIdeaIndex]?.category : "Dinner") || "Dinner";
-            return myRecipeCategory === "All" || category === myRecipeCategory;
+            return categoryFilter === "All" || category === categoryFilter;
         })
         .map(recipe => {
             const id = String(recipe.id);

@@ -1431,7 +1431,7 @@ const publishedRecipes = [
     "ingredients":[{"food":"Cottage Cheese","label":"1/2 cup","quantity":1},{"food":"Egg","label":"1 large egg","quantity":1},{"food":"Almond Flour","label":"1/4 cup","quantity":1},{"food":"Mozzarella Cheese","label":"1 oz (about 1/4 cup shredded)","quantity":1},{"food":"Garlic Powder","label":"1/4 teaspoon","quantity":1}],
     "totalCarbs":13.5,"plateCarbs":13.5,"servings":2,"portion":"flatbread half","category":"Lunch",
     "instructions":"Blend cottage cheese and egg until smooth. Stir in almond flour, mozzarella, and garlic powder. Spread into a thin oval on parchment and bake at 375°F until set and golden at the edges. Cool slightly before slicing.",
-    "image":"https://images.unsplash.com/photo-1549931319-a545dcf3bc73?auto=format&fit=crop&w=1000&q=85","photo":"Unsplash","source":"https://fdc.nal.usda.gov/","inspirationUrl":"https://www.pinterest.com/pin/714313190944450658/"
+    "image":"./Carbs%20logo.png","photo":"Carb Cruncher logo","source":"./Carbs%20logo.png","inspirationUrl":"https://www.pinterest.com/pin/714313190944450658/"
   },
   {
     "id":"pin-cottage-cheese-garlic-knots-20261102","name":"Cottage Cheese Garlic Knots",

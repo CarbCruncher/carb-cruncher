@@ -1474,6 +1474,7 @@
 
 </main>
 <script src="./published-recipes.js"></script>
+<script src="./supabase-config.js"></script>
 <script>
 
 /* =========================================================
@@ -8559,11 +8560,179 @@ function sendAppSuggestion(event) {
     if (status) status.textContent = "Sending… Check the new tab for a confirmation page. The first submission may require email activation.";
     return true;
 }
+const accountBackupKeys = [
+    "carbCruncherRecipes",
+    "carbCruncherCustomFoods",
+    "carbCruncherFavorites",
+    "carbCruncherCarbGoal",
+    "carbCruncherMealTargets",
+    "carbCruncherIdeaEdits",
+    "carbCruncherIdeaCustomizations",
+    "carbCruncherIdeaPantry",
+    "carbCruncherPreferences",
+    "carbCruncherLearningVoice"
+];
+
+let accountClientPromise = null;
+
+function accountConfigReady() {
+    const config = window.CARB_CRUNCHER_SUPABASE_CONFIG || {};
+    return Boolean(config.url && config.publishableKey);
+}
+
+async function getAccountClient() {
+    if (!accountConfigReady()) {
+        throw new Error("Account saving is not connected yet. Follow ACCOUNT_SETUP.md to connect the private account service.");
+    }
+    if (!accountClientPromise) {
+        const config = window.CARB_CRUNCHER_SUPABASE_CONFIG;
+        accountClientPromise = import("https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm")
+            .then(({ createClient }) => createClient(config.url, config.publishableKey));
+    }
+    return accountClientPromise;
+}
+
+function setAccountStatus(message, isError = false) {
+    const status = document.getElementById("accountStatus");
+    if (status) {
+        status.textContent = message;
+        status.style.color = isError ? "#A03024" : "#596454";
+    }
+}
+
+function accountSnapshot() {
+    const data = {};
+    accountBackupKeys.forEach(key => {
+        const value = localStorage.getItem(key);
+        if (value !== null) data[key] = value;
+    });
+    return data;
+}
+
+async function refreshAccountStatus() {
+    if (!accountConfigReady()) {
+        setAccountStatus("Optional accounts are not connected yet. Guest use continues to save on this device.");
+        return;
+    }
+    try {
+        const client = await getAccountClient();
+        const { data: { user }, error } = await client.auth.getUser();
+        if (error) throw error;
+        setAccountStatus(user
+            ? `Signed in as ${user.email}. Your food diary stays on this device.`
+            : "Not signed in. Your recipes and preferences stay on this device until you choose to save them to an account.");
+    } catch (error) {
+        setAccountStatus(error.message || "Could not check account status.", true);
+    }
+}
+
+async function accountSignIn(mode) {
+    const email = String(document.getElementById("accountEmail")?.value || "").trim();
+    const password = String(document.getElementById("accountPassword")?.value || "");
+    if (!email || !password) {
+        setAccountStatus("Enter your email address and password first.", true);
+        return;
+    }
+    if (password.length < 8) {
+        setAccountStatus("Use a password with at least 8 characters.", true);
+        return;
+    }
+    try {
+        setAccountStatus(mode === "signup" ? "Creating your account…" : "Signing in…");
+        const client = await getAccountClient();
+        const result = mode === "signup"
+            ? await client.auth.signUp({ email, password, options: { emailRedirectTo: new URL("./", location.href).href } })
+            : await client.auth.signInWithPassword({ email, password });
+        if (result.error) throw result.error;
+        if (mode === "signup" && !result.data.session) {
+            setAccountStatus("Check your email for a confirmation link, then come back here to sign in.");
+        } else {
+            setAccountStatus(`Signed in as ${result.data.user.email}. You can now save your recipes and preferences to your account.`);
+        }
+    } catch (error) {
+        setAccountStatus(error.message || "Account request failed. Check your email and password, then try again.", true);
+    }
+}
+
+async function saveAccountBackup() {
+    try {
+        setAccountStatus("Saving recipes and preferences to your account…");
+        const client = await getAccountClient();
+        const { data: { user }, error: userError } = await client.auth.getUser();
+        if (userError) throw userError;
+        if (!user) throw new Error("Sign in before saving to an account.");
+        const snapshot = accountSnapshot();
+        const { data: existing, error: readError } = await client.from("user_data").select("data").eq("user_id", user.id).maybeSingle();
+        if (readError) throw readError;
+        if (existing && !window.confirm("Replace the recipes and preferences already saved to this account with this device’s copy? The food diary is not included.")) {
+            setAccountStatus("Account backup was left unchanged.");
+            return;
+        }
+        const { error } = await client.from("user_data").upsert({
+            user_id: user.id,
+            data: snapshot,
+            updated_at: new Date().toISOString()
+        }, { onConflict: "user_id" });
+        if (error) throw error;
+        setAccountStatus("Saved. Your recipes, ingredients, and preferences are backed up to this account. The food diary is not included.");
+    } catch (error) {
+        setAccountStatus(error.message || "Could not save your account backup.", true);
+    }
+}
+
+async function restoreAccountBackup() {
+    if (!window.confirm("Restore the account copy of your recipes and preferences to this device? Matching local recipe and preference data will be replaced. Your food diary will stay on this device.")) return;
+    try {
+        setAccountStatus("Loading your account backup…");
+        const client = await getAccountClient();
+        const { data: { user }, error: userError } = await client.auth.getUser();
+        if (userError) throw userError;
+        if (!user) throw new Error("Sign in before restoring an account backup.");
+        const { data: record, error } = await client.from("user_data").select("data, updated_at").eq("user_id", user.id).maybeSingle();
+        if (error) throw error;
+        if (!record) throw new Error("There is no saved account copy yet. Save this device’s recipes first.");
+        accountBackupKeys.forEach(key => {
+            if (Object.prototype.hasOwnProperty.call(record.data || {}, key)) localStorage.setItem(key, record.data[key]);
+            else localStorage.removeItem(key);
+        });
+        location.reload();
+    } catch (error) {
+        setAccountStatus(error.message || "Could not restore your account backup.", true);
+    }
+}
+
+async function accountSignOut() {
+    try {
+        const client = await getAccountClient();
+        const { error } = await client.auth.signOut();
+        if (error) throw error;
+        setAccountStatus("Signed out. The account backup stays saved, and this device’s local data remains here.");
+    } catch (error) {
+        setAccountStatus(error.message || "Could not sign out.", true);
+    }
+}
+
 function openSettings() {
     const mealNames = ["breakfast", "lunch", "dinner"];
     const labelStyle = "display:block;color:#294A1D;font-size:16px;font-weight:800;margin:12px 0 5px;";
     const inputStyle = "box-sizing:border-box;width:100%;padding:11px;border:1px solid #C8D3C0;border-radius:10px;background:white;font:inherit;color:#263025;";
     showScreen("Settings", `
+        <div style="background:#FFFDF7;border:2px solid #D9E1D1;border-radius:25px;padding:20px;margin-bottom:16px;">
+            <h2 style="color:#294A1D;font-size:23px;margin:0 0 8px;">Optional account and backup</h2>
+            <p style="color:#263025;font-size:15px;line-height:1.55;margin:0 0 10px;">Use the app without an account, or sign in to save recipes, custom ingredients, and preferences for another device. Your food diary and current meal are not uploaded.</p>
+            <label for="accountEmail" style="${labelStyle}">Email address</label>
+            <input id="accountEmail" type="email" autocomplete="email" inputmode="email" placeholder="you@example.com" style="${inputStyle}">
+            <label for="accountPassword" style="${labelStyle}">Password</label>
+            <input id="accountPassword" type="password" autocomplete="current-password" minlength="8" placeholder="At least 8 characters" style="${inputStyle}">
+            <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;justify-content:center;">
+                <button type="button" onclick="accountSignIn('signup')" style="border:0;background:#3F6F2A;color:white;border-radius:10px;padding:10px 13px;font-weight:800;">Create account</button>
+                <button type="button" onclick="accountSignIn('signin')" style="border:1px solid #3F6F2A;background:#FFFDF7;color:#294A1D;border-radius:10px;padding:10px 13px;font-weight:800;">Sign in</button>
+                <button type="button" onclick="saveAccountBackup()" style="border:1px solid #C8D3C0;background:#F5F3E9;color:#294A1D;border-radius:10px;padding:10px 13px;font-weight:800;">Save to account</button>
+                <button type="button" onclick="restoreAccountBackup()" style="border:1px solid #C8D3C0;background:#F5F3E9;color:#294A1D;border-radius:10px;padding:10px 13px;font-weight:800;">Restore on this device</button>
+                <button type="button" onclick="accountSignOut()" style="border:1px solid #C8D3C0;background:white;color:#294A1D;border-radius:10px;padding:10px 13px;font-weight:800;">Sign out</button>
+            </div>
+            <p id="accountStatus" role="status" aria-live="polite" style="color:#596454;font-size:14px;line-height:1.5;margin:10px 0 0;">Guest use saves on this device. Account backup will be available after the secure account service is connected.</p>
+        </div>
         <div style="background:#FFFDF7;border:2px solid #D9E1D1;border-radius:25px;padding:20px;margin-bottom:16px;">
             <h2 style="color:#294A1D;font-size:23px;margin:0 0 8px;">Daily Carb Target</h2>
             <p style="color:#263025;font-size:17px;line-height:1.65;margin:0 0 14px;">There is no single carb target for everyone. If you have access to a doctor, nurse, diabetes educator, or dietitian, they can help you choose a personal goal. You can still learn and practice here on your own. This app is for learning and meal planning, not a diagnosis or treatment plan.</p>
@@ -8615,7 +8784,7 @@ function openSettings() {
             <label style="display:flex;align-items:flex-start;gap:11px;color:#263025;font-size:16px;line-height:1.5;margin-top:12px;"><input id="diaryPreference" type="checkbox" ${appPreferences.diaryEnabled?'checked':''} onchange="saveAppPreferences()" style="width:21px;height:21px;flex:0 0 auto;margin-top:2px;">Keep a food diary on this device. I can add meals, review carb estimates, and export a report for my health care professional.</label>
             <p style="color:#596454;font-size:14px;line-height:1.55;margin:8px 0 12px;">The diary is off until you turn it on. It records foods, portions, date and time, and estimated carbs. It does not include calories, protein, or other nutrients this app does not calculate.</p>
             <label style="display:flex;align-items:flex-start;gap:11px;color:#263025;font-size:16px;line-height:1.5;margin-top:12px;"><input id="dataSharingPreference" type="checkbox" ${appPreferences.dataSharingConsent?'checked':''} onchange="saveAppPreferences()" style="width:21px;height:21px;flex:0 0 auto;margin-top:2px;">I would like to opt in to anonymous app-use data sharing if it becomes available.</label>
-            <p style="color:#596454;font-size:14px;line-height:1.55;margin-top:8px;">Your preferences, recipes, and diary stay in this browser. If you choose to send feedback, the message goes through FormSubmit to the Carb Cruncher inbox; see <a href="https://formsubmit.co/privacy.pdf" target="_blank" rel="noopener" style="color:#294A1D;font-weight:800;">FormSubmit’s privacy policy</a>. Do not send medical or other private details. The separate data-sharing choice below does not transmit data in this app.</p>
+            <p style="color:#596454;font-size:14px;line-height:1.55;margin-top:8px;">Your food diary stays on this device. Recipes and preferences stay here unless you sign in and choose to save them to your account. If you choose to send feedback, the message goes through FormSubmit to the Carb Cruncher inbox; see <a href="https://formsubmit.co/privacy.pdf" target="_blank" rel="noopener" style="color:#294A1D;font-weight:800;">FormSubmit’s privacy policy</a>. Do not send medical or other private details. The separate data-sharing choice below does not transmit data in this app.</p>
         </div>
 
         <div style="background:#FFFDF7;border:2px solid #D9E1D1;border-radius:25px;padding:20px;margin-bottom:16px;">
@@ -8642,7 +8811,7 @@ function openSettings() {
         </div>
         <div style="background:#FFFDF7;border:2px solid #D9E1D1;border-radius:25px;padding:20px;">
             <h3 style="color:#294A1D;margin:0 0 12px;">Carb Cruncher</h3>
-            <p style="color:#596454;font-size:15px;line-height:1.55;margin:0;">Your preferences, recipes, and any optional diary entries are stored locally in this browser.</p>
+            <p style="color:#596454;font-size:15px;line-height:1.55;margin:0;">Guest recipes and preferences are stored locally in this browser. If you sign in, you can choose to back up recipes and preferences to your account. The food diary stays on this device.</p>
       
             </div>
     `);
@@ -8651,6 +8820,7 @@ function openSettings() {
         window.speechSynthesis.addEventListener("voiceschanged", populateLearningVoiceOptions);
         learningVoiceListenerAdded = true;
     }
+    refreshAccountStatus();
     renderPersonalFoodsSettings();
 }
 function renderPersonalFoodsSettings() {

@@ -1,6 +1,7 @@
-const CACHE_NAME = "carb-cruncher-app-v22";
+const CACHE_NAME = "carb-cruncher-app-v23";
 const APP_SHELL = [
   "./index.html",
+  "./about.html",
   "./published-recipes.js",
   "./supabase-config.js",
   "./app.webmanifest",
